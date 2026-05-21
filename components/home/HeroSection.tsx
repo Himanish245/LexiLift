@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import dynamic from "next/dynamic";
 import { GradientOrbs } from "@/components/animations/GradientOrbs";
 import { Button } from "@/components/shared/Button";
@@ -27,14 +27,14 @@ export function HeroSection({
   ctaPrimary,
   ctaSecondary,
 }: HeroSectionProps) {
-  const stagger = {
+  const stagger: Variants = {
     hidden: {},
     visible: {
       transition: { staggerChildren: 0.15 },
     },
   };
 
-  const fadeUp = {
+  const fadeUp: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
   };

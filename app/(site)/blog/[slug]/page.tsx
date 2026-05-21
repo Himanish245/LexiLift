@@ -12,8 +12,13 @@ import { AnimatedSection } from "@/components/shared/AnimatedSection";
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const slugs = await client.fetch(blogSlugsQuery);
-  return slugs.map((slug: any) => ({ slug: slug.slug }));
+  try {
+    const slugs = await client.fetch(blogSlugsQuery);
+    return slugs.map((slug: any) => ({ slug: slug.slug }));
+  } catch (error) {
+    console.error("Failed to fetch blog slugs for static generation:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

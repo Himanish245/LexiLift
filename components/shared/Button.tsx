@@ -1,7 +1,9 @@
 import Link from "next/link";
 
 interface ButtonProps {
-  href: string;
+  href?: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
+  type?: "button" | "submit" | "reset";
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "outline";
   size?: "sm" | "md" | "lg";
@@ -11,6 +13,8 @@ interface ButtonProps {
 
 export function Button({
   href,
+  onClick,
+  type = "button",
   children,
   variant = "primary",
   size = "md",
@@ -33,17 +37,24 @@ export function Button({
 
   const combinedClass = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 
-  if (isExternal) {
+  if (href) {
+    if (isExternal) {
+      return (
+        <a href={href} onClick={onClick} target="_blank" rel="noopener noreferrer" className={combinedClass}>
+          {children}
+        </a>
+      );
+    }
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={combinedClass}>
+      <Link href={href} onClick={onClick as any} className={combinedClass}>
         {children}
-      </a>
+      </Link>
     );
   }
 
   return (
-    <Link href={href} className={combinedClass}>
+    <button type={type} onClick={onClick as any} className={combinedClass}>
       {children}
-    </Link>
+    </button>
   );
 }
