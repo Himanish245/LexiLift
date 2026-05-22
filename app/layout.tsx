@@ -23,14 +23,20 @@ export const metadata: Metadata = {
   description: "Transform your documents into an intelligent AI knowledge base with RAG-powered search and chat.",
 };
 
+import { VisualEditing } from "next-sanity";
+import { draftMode } from "next/headers";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isDraftMode = draftMode().isEnabled;
+
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans">
+        {isDraftMode && <VisualEditing />}
         <AuthProvider>
           {children}
         </AuthProvider>

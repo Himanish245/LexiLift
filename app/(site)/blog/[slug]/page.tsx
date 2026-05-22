@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { blogPostQuery, blogSlugsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "@/sanity/lib/portable-text";
@@ -13,7 +13,7 @@ export const revalidate = 60;
 
 export async function generateStaticParams() {
   try {
-    const slugs = await client.fetch(blogSlugsQuery);
+    const slugs = await sanityFetch({ query: blogSlugsQuery });
     return slugs.map((slug: any) => ({ slug: slug.slug }));
   } catch (error) {
     console.error("Failed to fetch blog slugs for static generation:", error);
@@ -23,7 +23,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await client.fetch(blogPostQuery, { slug });
+  const post = await sanityFetch({ query: blogPostQuery, params: { slug } });
 
   if (!post) return {};
 
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = await client.fetch(blogPostQuery, { slug });
+  const post = await sanityFetch({ query: blogPostQuery, params: { slug } });
 
   if (!post) {
     notFound();

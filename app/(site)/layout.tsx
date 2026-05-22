@@ -1,4 +1,4 @@
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { siteSettingsQuery } from "@/sanity/lib/queries";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -8,7 +8,7 @@ export default async function SiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await client.fetch(siteSettingsQuery);
+  const settings = await sanityFetch({ query: siteSettingsQuery });
 
   const defaultNavLinks = [
     { label: "Home", href: "/", isExternal: false },

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { pricingPageQuery } from "@/sanity/lib/queries";
 import { PricingTiers } from "@/components/pricing/PricingTiers";
 import { FAQSection } from "@/components/pricing/FAQSection";
@@ -10,7 +10,7 @@ import { AnimatedSection } from "@/components/shared/AnimatedSection";
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await client.fetch(pricingPageQuery);
+  const data = await sanityFetch({ query: pricingPageQuery });
   return {
     title: data?.seo?.metaTitle || "Pricing",
     description: data?.seo?.metaDescription || "Simple, transparent pricing for teams of all sizes.",
@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PricingPage() {
-  const data = await client.fetch(pricingPageQuery);
+  const data = await sanityFetch({ query: pricingPageQuery });
 
   const defaultTiers = [
     {

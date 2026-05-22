@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { blogListQuery } from "@/sanity/lib/queries";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
@@ -9,11 +9,11 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Insights, updates, and thoughts on AI and knowledge management.",
+  description: "News, updates, and insights from the LexiLift team.",
 };
 
 export default async function BlogListPage() {
-  const posts = await client.fetch(blogListQuery);
+  const posts = await sanityFetch({ query: blogListQuery });
 
   return (
     <div className="pt-32 pb-24 px-4 max-w-7xl mx-auto">

@@ -26,4 +26,36 @@ export const previewClient = createClient({
   apiVersion,
   useCdn: false,
   token: process.env.SANITY_API_READ_TOKEN,
+  stega: {
+    enabled: true,
+    studioUrl: "/studio",
+  },
 });
+
+import { draftMode } from "next/headers";
+
+export async function sanityFetch<QueryResponse>({
+  query,
+  params = {},
+  tags = [],
+}: {
+  query: string;
+  params?: Record<string, unknown>;
+  tags?: string[];
+}): Promise<QueryResponse> {
+  const isDraftMode = draftMode().isEnabled;
+  if (isDraftMode && !process.env.SANITY_API_READ_TOKEN) {
+    throw new Error(
+      "The `SANITY_API_READ_TOKEN` environment variable is required in Draft Mode."
+    );
+  }
+
+  const sanityClient = isDraftMode ? previewClient : client;
+
+  return sanityClient.fetch<QueryResponse>(query, params, {
+    cache: isDraftMode ? "no-cache" : "force-cache",
+    next: {
+      tags,
+    },
+  });
+}

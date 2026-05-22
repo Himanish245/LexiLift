@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { aboutPageQuery } from "@/sanity/lib/queries";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
@@ -9,7 +9,7 @@ import { TeamGrid } from "@/components/about/TeamGrid";
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await client.fetch(aboutPageQuery);
+  const data = await sanityFetch({ query: aboutPageQuery });
   return {
     title: data?.seo?.metaTitle || "About Us",
     description: data?.seo?.metaDescription || "Our mission is to make organizational knowledge instantly accessible.",
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const data = await client.fetch(aboutPageQuery);
+  const data = await sanityFetch({ query: aboutPageQuery });
 
   const defaultValues = [
     { icon: "⚡", title: "Speed", description: "Answers should be instant. We optimize for millisecond responses." },

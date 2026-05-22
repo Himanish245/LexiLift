@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { homePageQuery } from "@/sanity/lib/queries";
 import { HeroSection } from "@/components/home/HeroSection";
 import { LogoMarquee } from "@/components/home/LogoMarquee";
@@ -10,7 +10,7 @@ import { CTASection } from "@/components/home/CTASection";
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await client.fetch(homePageQuery);
+  const data = await sanityFetch({ query: homePageQuery });
   return {
     title: data?.seo?.metaTitle || "LexiLift — AI-Powered Knowledge Base",
     description: data?.seo?.metaDescription || "Transform your documents into an intelligent AI knowledge base.",
@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const data = await client.fetch(homePageQuery);
+  const data = await sanityFetch({ query: homePageQuery });
 
   // Fallback data when Sanity is empty
   const hero = {

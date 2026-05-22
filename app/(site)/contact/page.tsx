@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { contactPageQuery } from "@/sanity/lib/queries";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { GradientOrbs } from "@/components/animations/GradientOrbs";
@@ -8,7 +8,7 @@ import { ContactForm } from "@/components/contact/ContactForm";
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await client.fetch(contactPageQuery);
+  const data = await sanityFetch({ query: contactPageQuery });
   return {
     title: data?.seo?.metaTitle || "Contact Us",
     description: data?.seo?.metaDescription || "Get in touch with the LexiLift team to see how we can help your organization.",
@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  const data = await client.fetch(contactPageQuery);
+  const data = await sanityFetch({ query: contactPageQuery });
 
   return (
     <>
