@@ -46,33 +46,38 @@ export function Footer({ siteName, footerLinks, socialLinks }: FooterProps) {
             </span>
           </div>
 
-          {/* Links */}
-          <div className="flex flex-wrap justify-center gap-6">
-            {footerLinks.map((link, index) => (
-              <Link
-                key={`${link.label}-${index}`}
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                {...(link.isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+          {/* Navigation & Social Links */}
+          <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-10">
+            {/* Symmetrical spaced-out footer links */}
+            <div className="flex items-center gap-8 md:gap-12">
+              {footerLinks.map((link, index) => (
+                <Link
+                  key={`${link.label}-${index}`}
+                  href={link.href}
+                  className="text-sm text-muted hover:text-foreground transition-colors duration-200 font-medium"
+                  {...(link.isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
 
-          {/* Social */}
-          <div className="flex gap-4">
-            {socialLinks.map((social) => (
-              <a
-                key={social.platform}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-muted-foreground hover:text-accent-purple transition-colors capitalize"
-              >
-                {social.platform}
-              </a>
-            ))}
+            {/* Social Links (only renders if present, separated by a thin line on desktop) */}
+            {socialLinks && socialLinks.length > 0 && (
+              <div className="flex items-center gap-4 sm:border-l sm:border-border/50 sm:pl-6">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.platform}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-muted hover:text-accent-purple transition-colors duration-200 capitalize font-medium"
+                  >
+                    {social.platform}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
