@@ -11,6 +11,8 @@ import { seo } from "./objects/seo";
 import { link } from "./objects/link";
 import { feature } from "./objects/feature";
 
+import { user } from "./documents/user";
+
 export const schemas = [
   // Documents
   homePage,
@@ -22,6 +24,7 @@ export const schemas = [
   category,
   teamMember,
   siteSettings,
+  user,
   // Objects
   seo,
   link,

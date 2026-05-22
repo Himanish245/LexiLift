@@ -20,10 +20,10 @@ export function ParticleNetwork({ className = "" }: ParticleNetworkProps) {
       init={particlesInit}
       options={{
         fullScreen: false,
-        fpsLimit: 60,
+        fpsLimit: 30,
         particles: {
           number: {
-            value: 60,
+            value: 35,
             density: { enable: true },
           },
           color: {
@@ -33,7 +33,7 @@ export function ParticleNetwork({ className = "" }: ParticleNetworkProps) {
             enable: true,
             color: "#7c5cff",
             distance: 150,
-            opacity: 0.15,
+            opacity: 0.2,
             width: 1,
           },
           move: {

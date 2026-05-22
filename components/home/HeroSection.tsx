@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, useScroll, useTransform } from "framer-motion";
 import dynamic from "next/dynamic";
 import { GradientOrbs } from "@/components/animations/GradientOrbs";
 import { Button } from "@/components/shared/Button";
@@ -27,6 +27,9 @@ export function HeroSection({
   ctaPrimary,
   ctaSecondary,
 }: HeroSectionProps) {
+  const { scrollY } = useScroll();
+  const yBackground = useTransform(scrollY, [0, 1000], [0, 400]);
+
   const stagger: Variants = {
     hidden: {},
     visible: {
@@ -42,8 +45,10 @@ export function HeroSection({
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
       {/* Background layers */}
-      <GradientOrbs />
-      <ParticleNetwork className="z-[1]" />
+      <motion.div style={{ y: yBackground }} className="absolute inset-0 z-0">
+        <GradientOrbs />
+        <ParticleNetwork className="z-[1]" />
+      </motion.div>
 
       {/* Content */}
       <motion.div

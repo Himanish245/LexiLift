@@ -25,16 +25,16 @@ export function Footer({ siteName, footerLinks, socialLinks }: FooterProps) {
           {/* Brand */}
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-md bg-gradient-to-br from-accent-purple to-accent-teal" />
-            <span className="font-bold text-white">{siteName}</span>
+            <span className="font-bold text-foreground">{siteName}</span>
           </div>
 
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-6">
-            {footerLinks.map((link) => (
+            {footerLinks.map((link, index) => (
               <Link
-                key={link.href}
+                key={`${link.label}-${index}`}
                 href={link.href}
-                className="text-sm text-muted-foreground hover:text-white transition-colors"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 {...(link.isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
                 {link.label}

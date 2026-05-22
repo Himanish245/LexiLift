@@ -36,7 +36,7 @@ export function TeamGrid({ members }: TeamGridProps) {
                 </div>
               )}
             </div>
-            <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+            <h3 className="text-xl font-bold text-foreground mb-1">{member.name}</h3>
             <p className="text-accent-teal text-sm font-medium mb-3">{member.role}</p>
             {member.bio && (
               <p className="text-muted-foreground text-sm line-clamp-3 mb-4">{member.bio}</p>
@@ -49,7 +49,7 @@ export function TeamGrid({ members }: TeamGridProps) {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-white transition-colors"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {/* Just using initial for platform to save space, ideally use icons */}
                     <span className="text-xs uppercase font-bold tracking-wider">{social.platform.charAt(0)}</span>

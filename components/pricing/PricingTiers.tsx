@@ -1,5 +1,6 @@
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/shared/Button";
+import { SpotlightCard } from "@/components/animations/SpotlightCard";
 import { cn } from "@/lib/utils";
 
 interface Tier {
@@ -21,15 +22,15 @@ interface PricingTiersProps {
 
 export function PricingTiers({ tiers }: PricingTiersProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 relative z-10">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 relative z-10">
       {tiers.map((tier, i) => (
-        <AnimatedSection key={tier.name} delay={i * 0.15}>
-          <div
+        <AnimatedSection key={tier.name} delay={i * 0.1}>
+          <SpotlightCard
             className={cn(
-              "relative bg-card rounded-3xl p-8 flex flex-col h-full",
+              "relative h-full flex flex-col bg-card border rounded-3xl p-8 card-hover",
               tier.highlighted
-                ? "border-2 border-accent-purple shadow-[0_0_40px_rgba(124,92,255,0.15)]"
-                : "border border-border card-hover"
+                ? "border-accent-purple/50 shadow-[0_0_40px_rgba(124,92,255,0.15)]"
+                : "border-border"
             )}
           >
             {tier.badge && (
@@ -39,7 +40,7 @@ export function PricingTiers({ tiers }: PricingTiersProps) {
             )}
             
             <div className="mb-8">
-              <h3 className="text-2xl font-bold text-white mb-2">{tier.name}</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-2">{tier.name}</h3>
               {tier.description && (
                 <p className="text-muted-foreground text-sm h-10">
                   {tier.description}
@@ -49,7 +50,7 @@ export function PricingTiers({ tiers }: PricingTiersProps) {
 
             <div className="mb-8">
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl md:text-5xl font-extrabold text-white">
+                <span className="text-4xl md:text-5xl font-extrabold text-foreground">
                   {tier.priceMonthly}
                 </span>
                 <span className="text-muted-foreground font-medium">
@@ -76,7 +77,7 @@ export function PricingTiers({ tiers }: PricingTiersProps) {
             >
               {tier.ctaText || "Get Started"}
             </Button>
-          </div>
+          </SpotlightCard>
         </AnimatedSection>
       ))}
     </div>

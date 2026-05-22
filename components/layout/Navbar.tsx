@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { MobileMenu } from "./MobileMenu";
 import { Button } from "@/components/shared/Button";
+import { useSession } from "next-auth/react";
 import { urlFor } from "@/sanity/lib/image";
 
 interface NavLink {
@@ -21,6 +22,7 @@ interface NavbarProps {
 }
 
 export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
+  const { data: session } = useSession();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -33,16 +35,17 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
   return (
     <>
       <motion.nav
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-4 left-4 right-4 z-50 mx-auto max-w-7xl rounded-2xl transition-all duration-500 ${
+        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+        className={`fixed top-4 left-4 right-4 z-50 mx-auto max-w-7xl rounded-2xl transition-all duration-300 ease-out ${
           scrolled
             ? "glass-card py-3 px-6 shadow-lg shadow-black/20"
             : "bg-transparent py-4 px-6"
         }`}
         style={{
           backdropFilter: scrolled ? "blur(16px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
         }}
       >
         <div className="flex items-center justify-between">
@@ -59,7 +62,7 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
             ) : (
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-purple to-accent-teal" />
             )}
-            <span className="text-lg font-bold text-white">{siteName}</span>
+            <span className="text-lg font-bold text-foreground">{siteName}</span>
           </Link>
 
           {/* Desktop Links */}
@@ -68,7 +71,7 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-muted hover:text-white transition-colors duration-200"
+                className="text-sm text-muted hover:text-foreground transition-colors duration-200"
                 {...(link.isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
                 {link.label}
@@ -78,12 +81,25 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Link href="/contact" className="text-sm text-muted hover:text-white transition-colors">
-              Log in
-            </Link>
-            <Button href="/contact" size="sm">
-              Book a Demo
-            </Button>
+            {session ? (
+              <>
+                <Link href="/account" className="text-sm text-muted hover:text-foreground transition-colors">
+                  Account
+                </Link>
+                <Button href="/api/auth/signout" size="sm" variant="outline">
+                  Log out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="text-sm text-muted hover:text-foreground transition-colors">
+                  Log in
+                </Link>
+                <Button href="/contact" size="sm">
+                  Contact Us
+                </Button>
+              </>
+            )}
           </div>
 
           {/* Mobile Controls */}

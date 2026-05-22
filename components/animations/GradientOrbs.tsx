@@ -7,7 +7,7 @@ export function GradientOrbs() {
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       {/* Large purple orb - top left */}
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full opacity-20"
+        className="absolute w-[500px] h-[500px] rounded-full opacity-20 gpu"
         style={{
           background: "radial-gradient(circle, rgba(124,92,255,0.4) 0%, transparent 70%)",
           filter: "blur(80px)",
@@ -19,14 +19,14 @@ export function GradientOrbs() {
           y: [0, -20, 15, 0],
         }}
         transition={{
-          duration: 12,
+          duration: 20,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "linear",
         }}
       />
       {/* Teal orb - bottom right */}
       <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full opacity-15"
+        className="absolute w-[400px] h-[400px] rounded-full opacity-15 gpu"
         style={{
           background: "radial-gradient(circle, rgba(0,212,170,0.35) 0%, transparent 70%)",
           filter: "blur(70px)",
@@ -38,14 +38,14 @@ export function GradientOrbs() {
           y: [0, 20, -10, 0],
         }}
         transition={{
-          duration: 15,
+          duration: 25,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "linear",
         }}
       />
       {/* Smaller purple orb - center right */}
       <motion.div
-        className="absolute w-[300px] h-[300px] rounded-full opacity-10"
+        className="absolute w-[300px] h-[300px] rounded-full opacity-10 gpu"
         style={{
           background: "radial-gradient(circle, rgba(124,92,255,0.3) 0%, transparent 70%)",
           filter: "blur(60px)",
@@ -57,9 +57,9 @@ export function GradientOrbs() {
           y: [0, 25, -15, 0],
         }}
         transition={{
-          duration: 18,
+          duration: 30,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "linear",
         }}
       />
     </div>

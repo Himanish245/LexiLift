@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/shared/Button";
 
+import { useSession } from "next-auth/react";
+
 interface NavLink {
   label: string;
   href: string;
@@ -17,6 +19,8 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
+  const { data: session } = useSession();
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -55,15 +59,36 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
                   </Link>
                 </motion.div>
               ))}
+              
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navLinks.length * 0.08 }}
-                className="pt-2"
+                className="pt-2 space-y-3"
               >
-                <Button href="/contact" size="lg" className="w-full text-center">
-                  Book a Demo
-                </Button>
+                {session ? (
+                  <>
+                    <Button href="/account" size="lg" className="w-full text-center" onClick={onClose}>
+                      Account
+                    </Button>
+                    <Button href="/api/auth/signout" size="lg" variant="outline" className="w-full text-center" onClick={onClose}>
+                      Log Out
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button href="/register" size="lg" className="w-full text-center" onClick={onClose}>
+                      Sign Up
+                    </Button>
+                    <Link
+                      href="/login"
+                      onClick={onClose}
+                      className="block text-center w-full py-3 text-muted hover:text-foreground transition-colors border border-border rounded-xl"
+                    >
+                      Log In
+                    </Link>
+                  </>
+                )}
               </motion.div>
             </nav>
           </motion.div>

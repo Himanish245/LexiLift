@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MagneticWrapper } from "@/components/animations/MagneticWrapper";
 
 interface ButtonProps {
   href?: string;
@@ -40,21 +41,27 @@ export function Button({
   if (href) {
     if (isExternal) {
       return (
-        <a href={href} onClick={onClick} target="_blank" rel="noopener noreferrer" className={combinedClass}>
-          {children}
-        </a>
+        <MagneticWrapper>
+          <a href={href} onClick={onClick} target="_blank" rel="noopener noreferrer" className={combinedClass}>
+            {children}
+          </a>
+        </MagneticWrapper>
       );
     }
     return (
-      <Link href={href} onClick={onClick as any} className={combinedClass}>
-        {children}
-      </Link>
+      <MagneticWrapper>
+        <Link href={href} onClick={onClick as any} className={combinedClass}>
+          {children}
+        </Link>
+      </MagneticWrapper>
     );
   }
 
   return (
-    <button type={type} onClick={onClick as any} className={combinedClass}>
-      {children}
-    </button>
+    <MagneticWrapper>
+      <button type={type} onClick={onClick as any} className={combinedClass}>
+        {children}
+      </button>
+    </MagneticWrapper>
   );
 }

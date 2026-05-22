@@ -34,7 +34,7 @@ export function FAQSection({ faqs }: FAQSectionProps) {
                 className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-purple"
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
               >
-                <span className="font-semibold text-white">{faq.question}</span>
+                <span className="font-semibold text-foreground">{faq.question}</span>
                 <span
                   className={cn(
                     "text-xl text-accent-teal transition-transform duration-300",

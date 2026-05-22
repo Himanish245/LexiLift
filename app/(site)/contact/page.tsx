@@ -43,24 +43,16 @@ export default async function ContactPage() {
             <AnimatedSection delay={0.2} className="space-y-12">
               <div>
                 <h2 className="text-2xl font-bold mb-6">{data?.calendarHeading || "Book a Live Demo"}</h2>
-                <div className="bg-card border border-border rounded-2xl p-8 min-h-[400px] flex items-center justify-center text-center">
-                  {data?.calendarEmbedUrl ? (
-                    <div className="w-full h-full relative">
-                      {/* Normally you'd embed an iframe here based on the URL */}
-                      <p className="text-muted-foreground">Calendar embed goes here for: {data.calendarEmbedUrl}</p>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className="w-16 h-16 rounded-full bg-accent-purple/20 flex items-center justify-center text-2xl mx-auto mb-4">
-                        📅
-                      </div>
-                      <h3 className="text-xl font-bold mb-2">Schedule a Call</h3>
-                      <p className="text-muted-foreground mb-6">Pick a time that works for you and we'll show you how LexiLift works.</p>
-                      <a href="https://cal.com" target="_blank" rel="noopener noreferrer" className="inline-block gradient-button px-6 py-2">
-                        Open Calendar
-                      </a>
-                    </div>
-                  )}
+                <div className="bg-card border border-border rounded-2xl overflow-hidden min-h-[450px]">
+                  <iframe
+                    src="https://cal.com/himanish-wmy52u?embed=true&theme=dark"
+                    width="100%"
+                    height="450"
+                    frameBorder="0"
+                    allow="camera;microphone"
+                    style={{ border: "none", minHeight: "450px" }}
+                    title="Schedule a call with LexiLift"
+                  />
                 </div>
               </div>
 

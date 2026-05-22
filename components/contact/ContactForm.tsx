@@ -10,11 +10,28 @@ export function ContactForm() {
     e.preventDefault();
     setStatus("submitting");
     
-    // Simulate API call
-    setTimeout(() => {
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: formData.get("firstName"),
+          lastName: formData.get("lastName"),
+          email: formData.get("email"),
+          companySize: formData.get("companySize"),
+          message: formData.get("message"),
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed");
       setStatus("success");
-      (e.target as HTMLFormElement).reset();
-    }, 1500);
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -34,12 +51,18 @@ export function ContactForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
+          {status === "error" && (
+            <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+              Something went wrong. Please try again.
+            </div>
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="firstName" className="text-sm font-medium text-foreground">First Name</label>
               <input
                 type="text"
                 id="firstName"
+                name="firstName"
                 required
                 className="w-full bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple transition-all"
                 placeholder="Jane"
@@ -50,6 +73,7 @@ export function ContactForm() {
               <input
                 type="text"
                 id="lastName"
+                name="lastName"
                 required
                 className="w-full bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple transition-all"
                 placeholder="Doe"
@@ -62,6 +86,7 @@ export function ContactForm() {
             <input
               type="email"
               id="email"
+              name="email"
               required
               className="w-full bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple transition-all"
               placeholder="jane@company.com"
@@ -69,9 +94,10 @@ export function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="company" className="text-sm font-medium text-foreground">Company Size</label>
+            <label htmlFor="companySize" className="text-sm font-medium text-foreground">Company Size</label>
             <select
-              id="company"
+              id="companySize"
+              name="companySize"
               className="w-full bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple transition-all text-foreground appearance-none"
             >
               <option value="1-10">1-10 employees</option>
@@ -86,6 +112,7 @@ export function ContactForm() {
             <label htmlFor="message" className="text-sm font-medium text-foreground">How can we help?</label>
             <textarea
               id="message"
+              name="message"
               required
               rows={4}
               className="w-full bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple transition-all resize-none"
