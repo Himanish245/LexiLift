@@ -34,7 +34,7 @@ export const previewClient = createClient({
 
 import { draftMode } from "next/headers";
 
-export async function sanityFetch<QueryResponse>({
+export async function sanityFetch<QueryResponse = any>({
   query,
   params = {},
   tags = [],
