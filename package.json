@@ -15,7 +15,6 @@
     "bcryptjs": "^3.0.3",
     "framer-motion": "^12.40.0",
     "next": "16.2.6",
-    "next-auth": "^4.24.14",
     "next-sanity": "^13.0.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",

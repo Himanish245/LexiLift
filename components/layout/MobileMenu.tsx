@@ -4,8 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/shared/Button";
 
-import { useSession } from "next-auth/react";
-
 interface NavLink {
   label: string;
   href: string;
@@ -19,7 +17,6 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
-  const { data: session } = useSession();
 
   return (
     <AnimatePresence>
@@ -66,29 +63,9 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
                 transition={{ delay: navLinks.length * 0.08 }}
                 className="pt-2 space-y-3"
               >
-                {session ? (
-                  <>
-                    <Button href="/account" size="lg" className="w-full text-center" onClick={onClose}>
-                      Account
-                    </Button>
-                    <Button href="/api/auth/signout" size="lg" variant="outline" className="w-full text-center" onClick={onClose}>
-                      Log Out
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <Button href="/register" size="lg" className="w-full text-center" onClick={onClose}>
-                      Sign Up
-                    </Button>
-                    <Link
-                      href="/login"
-                      onClick={onClose}
-                      className="block text-center w-full py-3 text-muted hover:text-foreground transition-colors border border-border rounded-xl"
-                    >
-                      Log In
-                    </Link>
-                  </>
-                )}
+                <Button href="/contact" size="lg" className="w-full text-center" onClick={onClose}>
+                  Contact Us
+                </Button>
               </motion.div>
             </nav>
           </motion.div>

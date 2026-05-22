@@ -6,7 +6,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { MobileMenu } from "./MobileMenu";
 import { Button } from "@/components/shared/Button";
-import { useSession } from "next-auth/react";
 import { urlFor } from "@/sanity/lib/image";
 
 interface NavLink {
@@ -22,7 +21,6 @@ interface NavbarProps {
 }
 
 export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
-  const { data: session } = useSession();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -79,27 +77,11 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
             ))}
           </div>
 
-          {/* Desktop CTA */}
+        {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            {session ? (
-              <>
-                <Link href="/account" className="text-sm text-muted hover:text-foreground transition-colors">
-                  Account
-                </Link>
-                <Button href="/api/auth/signout" size="sm" variant="outline">
-                  Log out
-                </Button>
-              </>
-            ) : (
-              <>
-                <Link href="/login" className="text-sm text-muted hover:text-foreground transition-colors">
-                  Log in
-                </Link>
-                <Button href="/contact" size="sm">
-                  Contact Us
-                </Button>
-              </>
-            )}
+            <Button href="/contact" size="sm">
+              Contact Us
+            </Button>
           </div>
 
           {/* Mobile Controls */}
