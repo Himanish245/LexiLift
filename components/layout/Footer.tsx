@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface FooterLink {
   label: string;
@@ -24,7 +25,13 @@ export function Footer({ siteName, footerLinks, socialLinks }: FooterProps) {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Brand */}
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-gradient-to-br from-accent-purple to-accent-teal" />
+            <Image
+              src="/logo.svg"
+              alt={siteName}
+              width={24}
+              height={24}
+              className="w-6 h-6 object-contain"
+            />
             <span className="font-bold text-foreground">{siteName}</span>
           </div>
 

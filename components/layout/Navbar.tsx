@@ -49,17 +49,13 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            {logo ? (
-              <Image
-                src={urlFor(logo).width(32).height(32).url()}
-                alt={siteName}
-                width={32}
-                height={32}
-                className="rounded-lg"
-              />
-            ) : (
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-purple to-accent-teal" />
-            )}
+            <Image
+              src="/logo.svg"
+              alt={siteName}
+              width={32}
+              height={32}
+              className="w-8 h-8 object-contain"
+            />
             <span className="text-lg font-bold text-foreground">{siteName}</span>
           </Link>
 
