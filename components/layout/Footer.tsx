@@ -24,15 +24,26 @@ export function Footer({ siteName, footerLinks, socialLinks }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Brand */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5 group">
             <Image
               src="/logo.svg"
               alt={siteName}
               width={24}
               height={24}
-              className="w-6 h-6 object-contain"
+              className="w-6 h-6 object-contain transition-transform duration-300 ease-out group-hover:rotate-[8deg]"
             />
-            <span className="font-bold text-foreground">{siteName}</span>
+            <span className="font-sora text-lg font-extrabold tracking-tight text-foreground">
+              {siteName === "LexiLift" ? (
+                <>
+                  Lexi
+                  <span className="bg-gradient-to-r from-[#00F0FF] via-[#7c5cff] to-[#FF007A] bg-clip-text text-transparent">
+                    Lift
+                  </span>
+                </>
+              ) : (
+                siteName
+              )}
+            </span>
           </div>
 
           {/* Links */}

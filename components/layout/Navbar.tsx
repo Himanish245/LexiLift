@@ -48,15 +48,29 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
       >
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link 
+            href="/" 
+            className="flex items-center gap-2.5 group transition-transform duration-200 hover:scale-[1.02]"
+          >
             <Image
               src="/logo.svg"
               alt={siteName}
               width={32}
               height={32}
-              className="w-8 h-8 object-contain"
+              className="w-8 h-8 object-contain transition-transform duration-300 ease-out group-hover:rotate-[8deg]"
             />
-            <span className="text-lg font-bold text-foreground">{siteName}</span>
+            <span className="font-sora text-xl font-extrabold tracking-tight text-foreground">
+              {siteName === "LexiLift" ? (
+                <>
+                  Lexi
+                  <span className="bg-gradient-to-r from-[#00F0FF] via-[#7c5cff] to-[#FF007A] bg-clip-text text-transparent">
+                    Lift
+                  </span>
+                </>
+              ) : (
+                siteName
+              )}
+            </span>
           </Link>
 
           {/* Desktop Links */}
