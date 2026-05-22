@@ -25,12 +25,12 @@ export const metadata: Metadata = {
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isDraftMode = draftMode().isEnabled;
+  const { isEnabled: isDraftMode } = await draftMode();
 
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
