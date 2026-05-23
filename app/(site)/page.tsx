@@ -4,7 +4,6 @@ import { homePageQuery } from "@/sanity/lib/queries";
 import { HeroSection } from "@/components/home/HeroSection";
 import { LogoMarquee } from "@/components/home/LogoMarquee";
 import { FeaturesGrid } from "@/components/home/FeaturesGrid";
-import { HowItWorks } from "@/components/home/HowItWorks";
 import { CTASection } from "@/components/home/CTASection";
 
 export const revalidate = 60;
@@ -22,12 +21,12 @@ export default async function HomePage() {
 
   // Fallback data when Sanity is empty
   const hero = {
-    tagline: data?.heroTagline || "AI-Powered Knowledge Base",
-    title: data?.heroTitle || "Your Knowledge,",
-    highlight: data?.heroHighlight || "Supercharged with AI",
-    subtitle: data?.heroSubtitle || "Transform your documents into an intelligent knowledge base. Instant answers powered by RAG retrieval.",
-    ctaPrimary: data?.heroCtaPrimary || { label: "Get Started Free", href: "/contact" },
-    ctaSecondary: data?.heroCtaSecondary || { label: "Watch Demo", href: "/contact" },
+    tagline: data?.heroTagline || "Intelligent Knowledge Hub",
+    title: data?.heroTitle || "Transform Your Team's Knowledge into Shared Wisdom.",
+    highlight: data?.heroHighlight || "",
+    subtitle: data?.heroSubtitle || "The human-centric AI that turns scattered documentation into a living digital sanctuary for your organization's collective intelligence.",
+    ctaPrimary: data?.heroCtaPrimary || { label: "Start Free Trial", href: "/contact" },
+    ctaSecondary: data?.heroCtaSecondary || { label: "Watch Story", href: "/contact" },
   };
 
   const defaultFeatures = [
@@ -37,12 +36,6 @@ export default async function HomePage() {
     { icon: "🔗", title: "Integrations", description: "Connect Slack, Notion, Drive & more" },
     { icon: "🔒", title: "Enterprise Security", description: "SOC 2, SSO, role-based access control" },
     { icon: "📊", title: "Analytics", description: "Track what your team searches for" },
-  ];
-
-  const defaultSteps = [
-    { icon: "📤", title: "Upload", description: "Add your docs, PDFs, web pages" },
-    { icon: "⚡", title: "Index", description: "AI processes & indexes everything" },
-    { icon: "💬", title: "Ask", description: "Get instant, cited answers" },
   ];
 
   return (
@@ -56,15 +49,11 @@ export default async function HomePage() {
           (f: any) => f.title !== "Seamless Integrations" && f.title !== "Integrations"
         )}
       />
-      <HowItWorks
-        headline={data?.howItWorksHeadline}
-        steps={data?.howItWorksSteps || defaultSteps}
-      />
       <CTASection
         title={data?.ctaTitle}
         highlight={data?.ctaHighlight}
-        subtitle={data?.ctaSubtitle || "Start for free. No credit card required."}
-        button={data?.ctaButton || { label: "Get Started Free", href: "/contact" }}
+        subtitle={data?.ctaSubtitle}
+        button={data?.ctaButton}
       />
     </>
   );
