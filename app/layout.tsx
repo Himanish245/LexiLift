@@ -30,6 +30,7 @@ export const metadata: Metadata = {
 
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
+import { SmoothScrollProvider } from "@/components/shared/SmoothScrollProvider";
 
 export default async function RootLayout({
   children,
@@ -42,7 +43,9 @@ export default async function RootLayout({
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${sora.variable}`}>
       <body className="font-sans">
         {isDraftMode && <VisualEditing />}
-        {children}
+        <SmoothScrollProvider>
+          {children}
+        </SmoothScrollProvider>
       </body>
     </html>
   );
