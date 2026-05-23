@@ -29,12 +29,12 @@ export function PricingTiers({ tiers }: PricingTiersProps) {
             className={cn(
               "relative h-full flex flex-col bg-card border rounded-3xl p-8 card-hover",
               tier.highlighted
-                ? "border-accent-purple/50 shadow-[0_0_40px_rgba(124,92,255,0.15)]"
+                ? "border-primary shadow-[0_8px_40px_rgba(0,0,0,0.06)]"
                 : "border-border"
             )}
           >
             {tier.badge && (
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-accent-purple to-accent-teal text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
                 {tier.badge}
               </div>
             )}

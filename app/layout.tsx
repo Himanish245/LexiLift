@@ -41,7 +41,7 @@ export default async function RootLayout({
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>
-        <SanityLive />
+        {isDraftMode && <SanityLive />}
       </body>
     </html>
   );

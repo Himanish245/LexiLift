@@ -27,7 +27,7 @@ export function Footer({ siteName, footerLinks, socialLinks }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           {/* Brand */}
-          <div className="flex items-center gap-2.5 group">
+          <div className="flex items-center gap-1.5 group">
             <Image
               src="/logo.svg"
               alt={siteName}
@@ -39,7 +39,7 @@ export function Footer({ siteName, footerLinks, socialLinks }: FooterProps) {
               {siteName === "LexiLift" ? (
                 <>
                   Lexi
-                  <span className="bg-gradient-to-r from-[#00F0FF] via-[#7c5cff] to-[#FF007A] bg-clip-text text-transparent">
+                  <span className="text-primary">
                     Lift
                   </span>
                 </>

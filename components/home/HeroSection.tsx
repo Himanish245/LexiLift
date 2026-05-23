@@ -81,7 +81,7 @@ export function HeroSection({
         <motion.div
           className="fixed w-[500px] h-[500px] rounded-full pointer-events-none z-[2]"
           style={{
-            background: "radial-gradient(circle, rgba(124,92,255,0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(66,99,79,0.12) 0%, transparent 70%)",
             filter: "blur(50px)",
             x: smoothX,
             y: smoothY,
@@ -133,7 +133,7 @@ export function HeroSection({
         )}
         <motion.h1
           variants={fadeUp}
-          className="relative text-4xl md:text-5xl lg:text-7xl font-extrabold leading-tight mb-6"
+          className="relative text-4xl md:text-5xl lg:text-7xl font-serif font-extrabold leading-tight mb-6"
         >
           {/* Glowing aura behind the text */}
           <motion.div 

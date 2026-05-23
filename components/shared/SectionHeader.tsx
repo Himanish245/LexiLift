@@ -14,7 +14,7 @@ export function SectionHeader({
   align = "center",
 }: SectionHeaderProps) {
   const alignClass = align === "center" ? "text-center" : "text-left";
-  const taglineColorClass = taglineColor === "purple" ? "text-accent-purple" : "text-accent-teal";
+  const taglineColorClass = taglineColor === "purple" ? "text-secondary" : "text-primary";
 
   return (
     <div className={`${alignClass} mb-12 md:mb-16`}>
@@ -23,7 +23,7 @@ export function SectionHeader({
           {tagline}
         </p>
       )}
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-balance">
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-balance">
         {title}
       </h2>
       {subtitle && (

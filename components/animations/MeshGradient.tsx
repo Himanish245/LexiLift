@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 export function MeshGradient({ className = "" }: { className?: string }) {
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`} aria-hidden="true">
-      {/* Teal orb */}
+      {/* Sage Green orb */}
       <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full opacity-10 mix-blend-screen gpu"
+        className="absolute w-[600px] h-[600px] rounded-full opacity-30 mix-blend-multiply gpu"
         style={{
-          background: "radial-gradient(circle, rgba(13,148,136,0.3) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(66,99,79,0.2) 0%, transparent 70%)",
           filter: "blur(100px)",
           top: "-20%",
           left: "-10%",
@@ -24,11 +24,11 @@ export function MeshGradient({ className = "" }: { className?: string }) {
           ease: "linear",
         }}
       />
-      {/* Violet orb */}
+      {/* Terracotta/Rust orb */}
       <motion.div
-        className="absolute w-[800px] h-[800px] rounded-full opacity-10 mix-blend-screen gpu"
+        className="absolute w-[800px] h-[800px] rounded-full opacity-25 mix-blend-multiply gpu"
         style={{
-          background: "radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(140,78,55,0.12) 0%, transparent 70%)",
           filter: "blur(120px)",
           bottom: "-20%",
           right: "-10%",
@@ -43,11 +43,11 @@ export function MeshGradient({ className = "" }: { className?: string }) {
           ease: "linear",
         }}
       />
-      {/* Blue orb */}
+      {/* Sand/Warm Gold orb */}
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full opacity-5 mix-blend-screen gpu"
+        className="absolute w-[500px] h-[500px] rounded-full opacity-40 mix-blend-multiply gpu"
         style={{
-          background: "radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(224,213,196,0.3) 0%, transparent 70%)",
           filter: "blur(90px)",
           top: "30%",
           right: "30%",

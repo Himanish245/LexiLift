@@ -14,7 +14,7 @@ export function CTASection({ title, highlight, subtitle, button }: CTASectionPro
       <AnimatedSection className="max-w-4xl mx-auto text-center bg-surface-container-low border border-outline-variant p-12 md:p-20 rounded-[3rem] relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg h-[200px] bg-primary-container opacity-20 blur-[100px] rounded-full pointer-events-none" />
         <div className="relative z-10">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4">
           {title || "Ready to"}{" "}
           <span className="text-primary">{highlight || "Supercharge"}</span>{" "}
           Your Knowledge?

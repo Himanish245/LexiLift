@@ -48,7 +48,7 @@ export function FeaturesGrid({ headline, tagline, features }: FeaturesGridProps)
                     {feature.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-on-surface tracking-tight">
+                <h3 className="text-xl font-serif font-bold mb-3 text-on-surface tracking-tight">
                   {feature.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed text-sm">

@@ -18,11 +18,11 @@ export function TeamGrid({ members }: TeamGridProps) {
   if (!members?.length) return null;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div className="flex flex-wrap justify-center gap-8">
       {members.map((member, i) => (
         <AnimatedSection key={member.name} delay={i * 0.1}>
-          <div className="group text-center">
-            <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-2 border-border group-hover:border-accent-purple transition-colors duration-300">
+          <div className="group text-center w-full max-w-[260px]">
+            <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-2 border-border group-hover:border-primary transition-colors duration-300">
               {member.image ? (
                 <Image
                   src={urlFor(member.image).width(400).height(400).url()}
@@ -31,13 +31,13 @@ export function TeamGrid({ members }: TeamGridProps) {
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-accent-purple/20 to-accent-teal/20 flex items-center justify-center text-4xl font-bold text-accent-purple">
+                <div className="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center text-4xl font-serif font-bold text-primary">
                   {member.name.charAt(0)}
                 </div>
               )}
             </div>
-            <h3 className="text-xl font-bold text-foreground mb-1">{member.name}</h3>
-            <p className="text-accent-teal text-sm font-medium mb-3">{member.role}</p>
+            <h3 className="text-xl font-serif font-bold text-foreground mb-1">{member.name}</h3>
+            <p className="text-secondary text-sm font-medium mb-3">{member.role}</p>
             {member.bio && (
               <p className="text-muted-foreground text-sm line-clamp-3 mb-4">{member.bio}</p>
             )}

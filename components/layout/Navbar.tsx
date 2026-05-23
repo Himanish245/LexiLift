@@ -50,16 +50,28 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
           {/* Logo */}
           <Link 
             href="/" 
-            className="flex items-center group transition-transform duration-200 hover:scale-[1.02]"
+            className="flex items-center gap-1.5 group transition-transform duration-200 hover:scale-[1.02]"
           >
             <Image
-              src="/logo.png"
+              src="/logo.svg"
               alt={siteName}
-              width={200}
-              height={60}
-              className="h-10 w-auto object-contain transition-transform duration-300 ease-out"
+              width={32}
+              height={32}
+              className="w-8 h-8 object-contain transition-transform duration-300 ease-out group-hover:rotate-[8deg]"
               priority
             />
+            <span className="font-sora text-xl font-extrabold tracking-tight text-foreground">
+              {siteName === "LexiLift" ? (
+                <>
+                  Lexi
+                  <span className="text-primary">
+                    Lift
+                  </span>
+                </>
+              ) : (
+                siteName
+              )}
+            </span>
           </Link>
 
           {/* Desktop Links */}

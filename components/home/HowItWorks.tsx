@@ -31,7 +31,7 @@ export function HowItWorks({ headline, steps }: HowItWorksProps) {
                   {i + 1}
                 </div>
                 <div className="text-3xl mb-3">{step.icon}</div>
-                <h3 className="text-lg font-semibold mb-2 text-foreground">{step.title}</h3>
+                <h3 className="text-lg font-serif font-bold mb-2 text-foreground">{step.title}</h3>
                 <p className="text-muted-foreground text-sm max-w-[200px] mx-auto">{step.description}</p>
               </div>
               {i < steps.length - 1 && (
