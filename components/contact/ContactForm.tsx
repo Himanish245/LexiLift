@@ -35,10 +35,10 @@ export function ContactForm() {
   };
 
   return (
-    <div className="bg-card border border-border rounded-2xl p-8">
+    <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-8">
       {status === "success" ? (
         <div className="text-center py-12">
-          <div className="w-16 h-16 rounded-full bg-accent-teal/20 text-accent-teal flex items-center justify-center text-2xl mx-auto mb-4">
+          <div className="w-16 h-16 rounded-full bg-primary/20 text-primary flex items-center justify-center text-2xl mx-auto mb-4">
             ✓
           </div>
           <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
@@ -64,7 +64,7 @@ export function ContactForm() {
                 id="firstName"
                 name="firstName"
                 required
-                className="w-full bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple transition-all"
+                className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-on-surface"
                 placeholder="Jane"
               />
             </div>
@@ -75,7 +75,7 @@ export function ContactForm() {
                 id="lastName"
                 name="lastName"
                 required
-                className="w-full bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple transition-all"
+                className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-on-surface"
                 placeholder="Doe"
               />
             </div>
@@ -88,7 +88,7 @@ export function ContactForm() {
               id="email"
               name="email"
               required
-              className="w-full bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple transition-all"
+              className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-on-surface"
               placeholder="jane@company.com"
             />
           </div>
@@ -98,7 +98,7 @@ export function ContactForm() {
             <select
               id="companySize"
               name="companySize"
-              className="w-full bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple transition-all text-foreground appearance-none"
+              className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-on-surface appearance-none"
             >
               <option value="1-10">1-10 employees</option>
               <option value="11-50">11-50 employees</option>
@@ -115,7 +115,7 @@ export function ContactForm() {
               name="message"
               required
               rows={4}
-              className="w-full bg-background border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple transition-all resize-none"
+              className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none text-on-surface"
               placeholder="Tell us about your team's knowledge management challenges..."
             />
           </div>
@@ -123,7 +123,7 @@ export function ContactForm() {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="w-full gradient-button py-3 text-center disabled:opacity-50"
+            className="w-full bg-primary text-on-primary rounded-full hover:bg-primary/90 py-3 text-center disabled:opacity-50 transition-all"
           >
             {status === "submitting" ? "Sending..." : "Send Message"}
           </button>

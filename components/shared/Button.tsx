@@ -25,9 +25,9 @@ export function Button({
   const baseStyles = "inline-flex items-center justify-center rounded-full font-medium transition-all duration-300 cursor-pointer";
 
   const variants = {
-    primary: "gradient-button",
-    secondary: "bg-card border border-border text-foreground hover:border-accent-purple/40 hover:shadow-[0_0_20px_rgba(124,92,255,0.1)]",
-    outline: "border border-accent-purple/40 text-accent-purple hover:bg-accent-purple/10",
+    primary: "bg-primary text-on-primary hover:bg-primary/90",
+    secondary: "bg-surface border border-outline text-on-surface hover:bg-surface-container shadow-sm",
+    outline: "border border-primary text-primary hover:bg-primary/10",
   };
 
   const sizes = {

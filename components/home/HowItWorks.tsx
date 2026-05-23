@@ -26,8 +26,8 @@ export function HowItWorks({ headline, steps }: HowItWorksProps) {
         <div className="flex flex-col md:flex-row gap-8 md:gap-4 items-center justify-center">
           {steps.map((step, i) => (
             <AnimatedSection key={step.title} delay={i * 0.15} className="flex items-center gap-4 md:gap-0">
-              <div className="text-center flex-1 glass-card p-6 rounded-2xl card-hover">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--color-accent-purple)] to-[var(--color-accent-teal)] flex items-center justify-center mx-auto mb-4 text-xl font-bold text-white shadow-[0_0_20px_rgba(0,212,170,0.4)]">
+              <div className="text-center flex-1 bg-surface-container-low border border-outline-variant p-6 rounded-[2rem] card-hover">
+                <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mx-auto mb-4 text-xl font-bold text-on-primary shadow-sm">
                   {i + 1}
                 </div>
                 <div className="text-3xl mb-3">{step.icon}</div>

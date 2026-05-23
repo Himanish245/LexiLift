@@ -100,7 +100,7 @@ export function HeroSection({
       >
         <motion.div 
           variants={fadeUp}
-          className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass-card mb-8 group hover:border-[var(--color-accent-purple)] transition-all duration-300 cursor-default"
+          className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-surface-container-low shadow-sm border border-outline-variant mb-8 group hover:border-primary transition-all duration-300 cursor-default"
         >
           <svg xmlns="http://www.w3.org/2000/svg" 
                width="1.2em" 
@@ -111,14 +111,14 @@ export function HeroSection({
                strokeWidth="2" 
                strokeLinecap="round" 
                strokeLinejoin="round"
-               className="text-[var(--color-accent-teal)] group-hover:rotate-12 transition-transform duration-300 flex-shrink-0">
+               className="text-primary group-hover:rotate-12 transition-transform duration-300 flex-shrink-0">
             <path d="m11 17 2 2a1 1 0 1 0 3-3"/>
             <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/>
             <path d="m21 3 1 11h-2"/>
             <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/>
             <path d="M3 4h8"/>
           </svg>
-          <span className="text-sm md:text-[20px] font-medium text-slate-200 leading-none">
+          <span className="text-sm md:text-[20px] font-medium text-on-surface leading-none">
             Join thousands of modern teams building a faster, smarter workplace.
           </span>
         </motion.div>
@@ -126,7 +126,7 @@ export function HeroSection({
         {tagline && (
           <motion.p
             variants={fadeUp}
-            className="text-xs tracking-[0.2em] uppercase text-accent-purple mb-4"
+            className="text-xs tracking-[0.2em] uppercase text-secondary mb-4"
           >
             {tagline}
           </motion.p>
@@ -139,7 +139,7 @@ export function HeroSection({
           <motion.div 
             className="absolute top-1/2 left-1/2 w-[120%] h-[150%] rounded-full mix-blend-screen pointer-events-none -z-10"
             style={{
-              background: "conic-gradient(from 0deg, var(--color-accent-teal), var(--color-accent-purple), var(--color-accent-pink), var(--color-accent-teal))",
+              background: "radial-gradient(circle, var(--color-primary-container), transparent 70%)",
               filter: "blur(60px)",
               opacity: 0.15,
               x: "-50%",
@@ -159,7 +159,7 @@ export function HeroSection({
           {highlight && (
             <>
               <br />
-              <span className="gradient-text">{highlight}</span>
+              <span className="text-primary">{highlight}</span>
             </>
           )}
         </motion.h1>
@@ -171,13 +171,13 @@ export function HeroSection({
             {subtitle.includes("Instant answers") ? (
               <>
                 {subtitle.split("Instant answers")[0]}
-                <span className="gradient-text font-semibold">Instant answers</span>
+                <span className="text-primary font-semibold">Instant answers</span>
                 {subtitle.split("Instant answers")[1]}
               </>
             ) : subtitle.includes("Instant Answers") ? (
               <>
                 {subtitle.split("Instant Answers")[0]}
-                <span className="gradient-text font-semibold">Instant Answers</span>
+                <span className="text-primary font-semibold">Instant Answers</span>
                 {subtitle.split("Instant Answers")[1]}
               </>
             ) : (
