@@ -16,7 +16,7 @@ interface HeroSectionProps {
 export function HeroSection({
   tagline,
   title,
-  highlight,
+  highlight: _highlight,
   subtitle,
   ctaPrimary,
   ctaSecondary,
@@ -135,7 +135,7 @@ export function HeroSection({
                   <span className="text-[13px] font-semibold text-on-surface leading-none">Insight Generated</span>
                 </div>
                 <p className="text-[11.5px] leading-relaxed text-on-surface-variant/90 italic font-serif">
-                  "The project history indicates a strong preference for iterative design..."
+                  &ldquo;The project history indicates a strong preference for iterative design...&rdquo;
                 </p>
               </div>
             </div>

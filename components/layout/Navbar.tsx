@@ -2,11 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { MobileMenu } from "./MobileMenu";
 import { Button } from "@/components/shared/Button";
-import { urlFor } from "@/sanity/lib/image";
 
 interface NavLink {
   label: string;
@@ -16,11 +14,11 @@ interface NavLink {
 
 interface NavbarProps {
   siteName: string;
-  logo?: any;
+  logo?: unknown;
   navLinks: NavLink[];
 }
 
-export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
+export function Navbar({ siteName: _siteName, logo: _logo, navLinks }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 

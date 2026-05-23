@@ -19,7 +19,7 @@ interface FooterProps {
   socialLinks?: SocialLink[];
 }
 
-export function Footer({ siteName, footerLinks, socialLinks }: FooterProps) {
+export function Footer({ siteName, footerLinks: _footerLinks, socialLinks: _socialLinks }: FooterProps) {
   const displaySiteName = siteName || "LexiLift";
 
   return (

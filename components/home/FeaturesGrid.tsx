@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 
 interface Feature {
@@ -15,9 +14,9 @@ interface FeaturesGridProps {
   features?: Feature[];
 }
 
-export function FeaturesGrid({ headline, tagline, features }: FeaturesGridProps) {
+export function FeaturesGrid({ headline, tagline, features: _features }: FeaturesGridProps) {
   const displayHeadline = headline || "Cultivating Clarity";
-  const displaySubtitle = tagline || "We designed LexiLift to feel less like a tool and more like a helpful librarian who understands your team's unique language.";
+  const displaySubtitle = tagline || "We designed LexiLift to feel less like a tool and more like a helpful librarian who understands your team&apos;s unique language.";
 
   return (
     <section className="relative py-20 md:py-28 px-6 max-w-7xl mx-auto bg-surface" id="platform">
@@ -87,7 +86,7 @@ export function FeaturesGrid({ headline, tagline, features }: FeaturesGridProps)
                   2. Contextual Synthesis
                 </h3>
                 <p className="text-on-surface-variant/85 leading-relaxed text-sm font-sans">
-                  Our AI doesn't just index; it understands. It links related concepts across projects to build a holistic wisdom map.
+                  Our AI doesn&apos;t just index; it understands. It links related concepts across projects to build a holistic wisdom map.
                 </p>
               </div>
             </div>

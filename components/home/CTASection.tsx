@@ -5,12 +5,11 @@ import { Button } from "@/components/shared/Button";
 
 interface CTASectionProps {
   title?: string;
-  highlight?: string;
   subtitle?: string;
   button?: { label: string; href: string; isExternal?: boolean };
 }
 
-export function CTASection({ title, highlight, subtitle, button }: CTASectionProps) {
+export function CTASection({ title, subtitle, button }: CTASectionProps) {
   const displayTitle = title || "Ready to cultivate your team's wisdom?";
   const displaySubtitle = subtitle || "Join over 500+ forward-thinking teams using LexiLift to transform their digital environment into a sanctuary for thought.";
   const displayButton = button || { label: "Get Started for Free", href: "/contact" };
