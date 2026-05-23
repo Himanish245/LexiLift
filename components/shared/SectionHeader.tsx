@@ -1,6 +1,6 @@
 interface SectionHeaderProps {
   tagline?: string;
-  title: string;
+  title: React.ReactNode;
   subtitle?: string;
   taglineColor?: "purple" | "teal";
   align?: "center" | "left";

@@ -23,30 +23,36 @@ export function ParticleNetwork({ className = "" }: ParticleNetworkProps) {
         fpsLimit: 30,
         particles: {
           number: {
-            value: 35,
+            value: 50,
             density: { enable: true },
           },
           color: {
-            value: ["#7c5cff", "#00d4aa"],
+            value: ["#0d9488", "#7c3aed", "#2563eb"],
           },
           links: {
             enable: true,
-            color: "#7c5cff",
-            distance: 150,
-            opacity: 0.2,
-            width: 1,
+            color: "#0d9488",
+            distance: 130,
+            opacity: 0.15,
+            width: 0.5,
+            shadow: { enable: true, color: "#0d9488", blur: 2 }
           },
           move: {
             enable: true,
-            speed: 0.8,
+            speed: 0.5,
             direction: "none",
             outModes: { default: "bounce" },
           },
           opacity: {
-            value: { min: 0.2, max: 0.5 },
+            value: { min: 0.1, max: 0.4 },
           },
           size: {
-            value: { min: 1, max: 2.5 },
+            value: { min: 0.5, max: 2 },
+          },
+          shadow: {
+            enable: true,
+            blur: 5,
+            color: "#0d9488",
           },
         },
         interactivity: {

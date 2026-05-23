@@ -1,8 +1,11 @@
 "use client";
 
-import { motion, Variants, useScroll, useTransform } from "framer-motion";
+import { motion, Variants, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { GradientOrbs } from "@/components/animations/GradientOrbs";
+import { MeshGradient } from "@/components/animations/MeshGradient";
+import { NoiseOverlay } from "@/components/animations/NoiseOverlay";
 import { Button } from "@/components/shared/Button";
 
 const ParticleNetwork = dynamic(
@@ -28,7 +31,25 @@ export function HeroSection({
   ctaSecondary,
 }: HeroSectionProps) {
   const { scrollY } = useScroll();
-  const yBackground = useTransform(scrollY, [0, 1000], [0, 400]);
+  const yBackgroundFast = useTransform(scrollY, [0, 1000], [0, 600]);
+  const yBackgroundSlow = useTransform(scrollY, [0, 1000], [0, 200]);
+
+  // Mouse follow glow state
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  // useSpring gives it that "slow, fluid follow" feel
+  const smoothX = useSpring(mouseX, { damping: 40, stiffness: 50, mass: 2 });
+  const smoothY = useSpring(mouseY, { damping: 40, stiffness: 50, mass: 2 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Offset by half the width/height of the glow (500px/2 = 250) to center it
+      mouseX.set(e.clientX - 250);
+      mouseY.set(e.clientY - 250);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
   const stagger: Variants = {
     hidden: {},
@@ -44,10 +65,30 @@ export function HeroSection({
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
-      {/* Background layers */}
-      <motion.div style={{ y: yBackground }} className="absolute inset-0 z-0">
+      <NoiseOverlay />
+      
+      {/* Deep parallax mesh gradient */}
+      <motion.div style={{ y: yBackgroundFast }} className="absolute inset-0 z-0">
+        <MeshGradient />
+      </motion.div>
+
+      {/* Slower parallax elements */}
+      <motion.div style={{ y: yBackgroundSlow }} className="absolute inset-0 z-[1] pointer-events-none">
         <GradientOrbs />
         <ParticleNetwork className="z-[1]" />
+        
+        {/* Slow mouse-follow glow */}
+        <motion.div
+          className="fixed w-[500px] h-[500px] rounded-full pointer-events-none z-[2]"
+          style={{
+            background: "radial-gradient(circle, rgba(124,92,255,0.15) 0%, transparent 70%)",
+            filter: "blur(50px)",
+            x: smoothX,
+            y: smoothY,
+            left: 0,
+            top: 0,
+          }}
+        />
       </motion.div>
 
       {/* Content */}
@@ -92,8 +133,28 @@ export function HeroSection({
         )}
         <motion.h1
           variants={fadeUp}
-          className="text-4xl md:text-5xl lg:text-7xl font-extrabold leading-tight mb-6"
+          className="relative text-4xl md:text-5xl lg:text-7xl font-extrabold leading-tight mb-6"
         >
+          {/* Glowing aura behind the text */}
+          <motion.div 
+            className="absolute top-1/2 left-1/2 w-[120%] h-[150%] rounded-full mix-blend-screen pointer-events-none -z-10"
+            style={{
+              background: "conic-gradient(from 0deg, var(--color-accent-teal), var(--color-accent-purple), var(--color-accent-pink), var(--color-accent-teal))",
+              filter: "blur(60px)",
+              opacity: 0.15,
+              x: "-50%",
+              y: "-50%"
+            }}
+            animate={{ 
+              rotate: [0, 360],
+              scale: [1, 1.05, 1] 
+            }}
+            transition={{ 
+              rotate: { duration: 15, repeat: Infinity, ease: "linear" },
+              scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            }}
+          />
+
           {title}
           {highlight && (
             <>
@@ -107,7 +168,21 @@ export function HeroSection({
             variants={fadeUp}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            {subtitle}
+            {subtitle.includes("Instant answers") ? (
+              <>
+                {subtitle.split("Instant answers")[0]}
+                <span className="gradient-text font-semibold">Instant answers</span>
+                {subtitle.split("Instant answers")[1]}
+              </>
+            ) : subtitle.includes("Instant Answers") ? (
+              <>
+                {subtitle.split("Instant Answers")[0]}
+                <span className="gradient-text font-semibold">Instant Answers</span>
+                {subtitle.split("Instant Answers")[1]}
+              </>
+            ) : (
+              subtitle
+            )}
           </motion.p>
         )}
         <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
