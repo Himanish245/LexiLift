@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "react-slice"; // wait, Next.js Link! Let's use 'next/link'
 import Link from "next/link";
 
 interface FooterLink {
