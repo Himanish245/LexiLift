@@ -34,15 +34,4 @@ export const previewClient = createClient({
 });
 
 
-import { sanityFetch as liveSanityFetch } from "./live";
 
-export async function sanityFetch<QueryResponse = any>({
-  query,
-  params = {},
-}: {
-  query: string;
-  params?: Record<string, unknown>;
-}): Promise<QueryResponse> {
-  const { data } = await liveSanityFetch({ query, params });
-  return data as QueryResponse;
-}

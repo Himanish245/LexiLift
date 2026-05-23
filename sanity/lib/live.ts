@@ -3,7 +3,7 @@ import { client } from "./client";
 
 const token = process.env.SANITY_API_READ_TOKEN;
 
-export const { sanityFetch, SanityLive } = defineLive({
+const { sanityFetch: liveSanityFetch, SanityLive } = defineLive({
   client: client.withConfig({
     // Live API requires useCdn: false and perspective: 'published'
     apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-05-22",
@@ -11,3 +11,16 @@ export const { sanityFetch, SanityLive } = defineLive({
   browserToken: token,
   serverToken: token,
 });
+
+export async function sanityFetch<QueryResponse = any>({
+  query,
+  params = {},
+}: {
+  query: string;
+  params?: Record<string, unknown>;
+}): Promise<QueryResponse> {
+  const { data } = await liveSanityFetch({ query, params });
+  return data as QueryResponse;
+}
+
+export { SanityLive };

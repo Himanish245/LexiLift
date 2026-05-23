@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import { homePageQuery } from "@/sanity/lib/queries";
 import { HeroSection } from "@/components/home/HeroSection";
 import { LogoMarquee } from "@/components/home/LogoMarquee";

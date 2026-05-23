@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import { contactPageQuery } from "@/sanity/lib/queries";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { GradientOrbs } from "@/components/animations/GradientOrbs";
