@@ -31,6 +31,7 @@ export const metadata: Metadata = {
 import { VisualEditing } from "next-sanity/visual-editing";
 import { draftMode } from "next/headers";
 import { SmoothScrollProvider } from "@/components/shared/SmoothScrollProvider";
+import { SanityLive } from "@/sanity/lib/live";
 
 export default async function RootLayout({
   children,
@@ -46,6 +47,7 @@ export default async function RootLayout({
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>
+        <SanityLive />
       </body>
     </html>
   );
