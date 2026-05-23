@@ -64,7 +64,7 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
                 className="pt-2 space-y-3"
               >
                 <Button href="/contact" size="lg" className="w-full text-center" onClick={onClose}>
-                  Contact Us
+                  demo
                 </Button>
               </motion.div>
             </nav>

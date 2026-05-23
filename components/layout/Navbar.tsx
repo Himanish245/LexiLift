@@ -90,7 +90,7 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
         {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <Button href="/contact" size="sm">
-              Contact Us
+              demo
             </Button>
           </div>
 
