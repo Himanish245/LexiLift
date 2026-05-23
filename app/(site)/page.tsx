@@ -52,7 +52,9 @@ export default async function HomePage() {
       <FeaturesGrid
         headline={data?.featuresHeadline}
         tagline={data?.featuresTagline}
-        features={data?.features || defaultFeatures}
+        features={(data?.features || defaultFeatures).filter(
+          (f: any) => f.title !== "Seamless Integrations" && f.title !== "Integrations"
+        )}
       />
       <HowItWorks
         headline={data?.howItWorksHeadline}
