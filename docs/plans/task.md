@@ -1,7 +1,7 @@
 | Status | Task |
 |--------|------|
-| [/] | Task 1: Update Navbar Component |
-| [ ] | Task 2: Update HeroSection Component |
+| [x] | Task 1: Update Navbar Component |
+| [/] | Task 2: Update HeroSection Component |
 | [ ] | Task 3: Update LogoMarquee to Trusted Logos Section |
 | [ ] | Task 4: Update FeaturesGrid Component |
 | [ ] | Task 5: Update CTASection Component |

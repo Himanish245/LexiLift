@@ -1,17 +1,8 @@
 "use client";
 
-import { motion, Variants, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
-import { useEffect } from "react";
-import dynamic from "next/dynamic";
-import { GradientOrbs } from "@/components/animations/GradientOrbs";
-import { MeshGradient } from "@/components/animations/MeshGradient";
-import { NoiseOverlay } from "@/components/animations/NoiseOverlay";
+import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/shared/Button";
-
-const ParticleNetwork = dynamic(
-  () => import("@/components/animations/ParticleNetwork").then((m) => m.ParticleNetwork),
-  { ssr: false }
-);
 
 interface HeroSectionProps {
   tagline?: string;
@@ -30,174 +21,128 @@ export function HeroSection({
   ctaPrimary,
   ctaSecondary,
 }: HeroSectionProps) {
-  const { scrollY } = useScroll();
-  const yBackgroundFast = useTransform(scrollY, [0, 1000], [0, 600]);
-  const yBackgroundSlow = useTransform(scrollY, [0, 1000], [0, 200]);
-
-  // Mouse follow glow state
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  // useSpring gives it that "slow, fluid follow" feel
-  const smoothX = useSpring(mouseX, { damping: 40, stiffness: 50, mass: 2 });
-  const smoothY = useSpring(mouseY, { damping: 40, stiffness: 50, mass: 2 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      // Offset by half the width/height of the glow (500px/2 = 250) to center it
-      mouseX.set(e.clientX - 250);
-      mouseY.set(e.clientY - 250);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
-
-  const stagger: Variants = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.15 },
-    },
-  };
-
-  const fadeUp: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
-  };
+  // Mock fallback values corresponding to the screenshot design
+  const displayTagline = tagline || "Intelligent Knowledge Hub";
+  const displayTitle = title || "Transform Your Team's Knowledge into Shared Wisdom.";
+  const displaySubtitle = subtitle || "The human-centric AI that turns scattered documentation into a living digital sanctuary for your organization's collective intelligence.";
+  const displayCtaPrimary = ctaPrimary || { label: "Start Free Trial", href: "/contact" };
+  const displayCtaSecondary = ctaSecondary || { label: "Watch Story", href: "/contact" };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
-      <NoiseOverlay />
-      
-      {/* Deep parallax mesh gradient */}
-      <motion.div style={{ y: yBackgroundFast }} className="absolute inset-0 z-0">
-        <MeshGradient />
-      </motion.div>
-
-      {/* Slower parallax elements */}
-      <motion.div style={{ y: yBackgroundSlow }} className="absolute inset-0 z-[1] pointer-events-none">
-        <GradientOrbs />
-        <ParticleNetwork className="z-[1]" />
-        
-        {/* Slow mouse-follow glow */}
-        <motion.div
-          className="fixed w-[500px] h-[500px] rounded-full pointer-events-none z-[2]"
-          style={{
-            background: "radial-gradient(circle, rgba(66,99,79,0.12) 0%, transparent 70%)",
-            filter: "blur(50px)",
-            x: smoothX,
-            y: smoothY,
-            left: 0,
-            top: 0,
-          }}
-        />
-      </motion.div>
-
-      {/* Content */}
-      <motion.div
-        variants={stagger}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 text-center max-w-4xl mx-auto px-4 flex flex-col items-center"
-      >
-        <motion.div 
-          variants={fadeUp}
-          className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-surface-container-low shadow-sm border border-outline-variant mb-8 group hover:border-primary transition-all duration-300 cursor-default"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" 
-               width="1.2em" 
-               height="1.2em" 
-               viewBox="0 0 24 24" 
-               fill="none" 
-               stroke="currentColor" 
-               strokeWidth="2" 
-               strokeLinecap="round" 
-               strokeLinejoin="round"
-               className="text-primary group-hover:rotate-12 transition-transform duration-300 flex-shrink-0">
-            <path d="m11 17 2 2a1 1 0 1 0 3-3"/>
-            <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/>
-            <path d="m21 3 1 11h-2"/>
-            <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/>
-            <path d="M3 4h8"/>
-          </svg>
-          <span className="text-sm md:text-[20px] font-medium text-on-surface leading-none">
-            Join thousands of modern teams building a faster, smarter workplace.
-          </span>
-        </motion.div>
-
-        {tagline && (
-          <motion.p
-            variants={fadeUp}
-            className="text-xs tracking-[0.2em] uppercase text-secondary mb-4"
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-16 bg-surface">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 w-full z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Column: Copy & Actions */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            className="lg:col-span-6 flex flex-col items-start text-left"
           >
-            {tagline}
-          </motion.p>
-        )}
-        <motion.h1
-          variants={fadeUp}
-          className="relative text-4xl md:text-5xl lg:text-7xl font-serif font-extrabold leading-tight mb-6"
-        >
-          {/* Glowing aura behind the text */}
-          <motion.div 
-            className="absolute top-1/2 left-1/2 w-[120%] h-[150%] rounded-full mix-blend-screen pointer-events-none -z-10"
-            style={{
-              background: "radial-gradient(circle, var(--color-primary-container), transparent 70%)",
-              filter: "blur(60px)",
-              opacity: 0.15,
-              x: "-50%",
-              y: "-50%"
-            }}
-            animate={{ 
-              rotate: [0, 360],
-              scale: [1, 1.05, 1] 
-            }}
-            transition={{ 
-              rotate: { duration: 15, repeat: Infinity, ease: "linear" },
-              scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-            }}
-          />
+            {/* Tagline Pill */}
+            <div className="inline-block bg-[#f4f3ef] border border-outline-variant/35 text-on-surface-variant/80 px-4.5 py-1.5 rounded-full text-[13px] font-medium mb-8">
+              {displayTagline}
+            </div>
 
-          {title}
-          {highlight && (
-            <>
-              <br />
-              <span className="text-primary">{highlight}</span>
-            </>
-          )}
-        </motion.h1>
-        {subtitle && (
-          <motion.p
-            variants={fadeUp}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+            {/* Headline */}
+            <h1 className="text-4xl md:text-5xl lg:text-[56px] font-serif font-semibold text-on-surface leading-[1.12] tracking-tight mb-6">
+              {displayTitle}
+            </h1>
+
+            {/* Subtext */}
+            <p className="text-base md:text-lg text-on-surface-variant/90 max-w-xl mb-10 leading-relaxed font-sans">
+              {displaySubtitle}
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4">
+              <Button
+                href={displayCtaPrimary.href}
+                size="lg"
+                isExternal={displayCtaPrimary.isExternal}
+                className="bg-primary text-on-primary hover:bg-primary-container text-[15px] font-semibold px-8 py-3.5 rounded-full shadow-sm"
+              >
+                {displayCtaPrimary.label}
+              </Button>
+              
+              <Button
+                href={displayCtaSecondary.href}
+                variant="secondary"
+                size="lg"
+                isExternal={displayCtaSecondary.isExternal}
+                className="bg-transparent border border-outline-variant/60 text-on-surface hover:bg-surface-container-low text-[15px] font-semibold px-6 py-3.5 rounded-full flex items-center gap-2"
+              >
+                {/* Play Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-on-surface-variant/80"
+                >
+                  <polygon points="6 3 20 12 6 21 6 3" />
+                </svg>
+                {displayCtaSecondary.label}
+              </Button>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Visual Showcase */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
+            className="lg:col-span-6 flex justify-center items-center relative py-12"
           >
-            {subtitle.includes("Instant answers") ? (
-              <>
-                {subtitle.split("Instant answers")[0]}
-                <span className="text-primary font-semibold">Instant answers</span>
-                {subtitle.split("Instant answers")[1]}
-              </>
-            ) : subtitle.includes("Instant Answers") ? (
-              <>
-                {subtitle.split("Instant Answers")[0]}
-                <span className="text-primary font-semibold">Instant Answers</span>
-                {subtitle.split("Instant Answers")[1]}
-              </>
-            ) : (
-              subtitle
-            )}
-          </motion.p>
-        )}
-        <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-          {ctaPrimary && (
-            <Button href={ctaPrimary.href} size="lg" isExternal={ctaPrimary.isExternal}>
-              {ctaPrimary.label} →
-            </Button>
-          )}
-          {ctaSecondary && (
-            <Button href={ctaSecondary.href} variant="secondary" size="lg" isExternal={ctaSecondary.isExternal}>
-              {ctaSecondary.label}
-            </Button>
-          )}
-        </motion.div>
-      </motion.div>
+            {/* The Picture Frame & Image */}
+            <div className="relative w-full max-w-[500px] aspect-[4/3] bg-[#758474] rounded-[2.5rem] rotate-[3.5deg] shadow-lg flex items-center justify-center p-5 group hover:rotate-[1.5deg] transition-all duration-500 ease-out">
+              <div className="relative w-full h-full -rotate-[3.5deg] group-hover:-rotate-[1.5deg] transition-all duration-500 ease-out rounded-[1.8rem] overflow-hidden shadow-inner">
+                <Image
+                  src="/team_meeting.png"
+                  alt="Team collaborating in a warm, modern office"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+
+              {/* Overlapping Insight Generated Widget */}
+              <div className="absolute -bottom-6 -left-6 bg-white border border-outline-variant/40 rounded-2xl p-4 shadow-xl max-w-[250px] z-20 -rotate-[3.5deg] group-hover:-rotate-[1.5deg] transition-all duration-500 ease-out flex flex-col gap-2">
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center w-6 h-6 rounded-full bg-[#fcede8] text-secondary">
+                    {/* Sparkle SVG Icon */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                    </svg>
+                  </div>
+                  <span className="text-[13px] font-semibold text-on-surface leading-none">Insight Generated</span>
+                </div>
+                <p className="text-[11.5px] leading-relaxed text-on-surface-variant/90 italic font-serif">
+                  "The project history indicates a strong preference for iterative design..."
+                </p>
+              </div>
+            </div>
+
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
