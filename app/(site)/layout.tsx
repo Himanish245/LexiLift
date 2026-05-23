@@ -8,7 +8,7 @@ export default async function SiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await sanityFetch({ query: siteSettingsQuery });
+  const { data: settings } = await sanityFetch({ query: siteSettingsQuery });
 
   const defaultNavLinks = [
     { label: "Home", href: "/", isExternal: false },

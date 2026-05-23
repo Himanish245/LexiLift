@@ -10,7 +10,7 @@ import { AnimatedSection } from "@/components/shared/AnimatedSection";
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await sanityFetch({ query: pricingPageQuery });
+  const { data } = await sanityFetch({ query: pricingPageQuery });
   return {
     title: data?.seo?.metaTitle || "Pricing",
     description: data?.seo?.metaDescription || "Simple, transparent pricing for teams of all sizes.",
@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PricingPage() {
-  const data = await sanityFetch({ query: pricingPageQuery });
+  const { data } = await sanityFetch({ query: pricingPageQuery });
 
   const defaultTiers = [
     {

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BlogListPage() {
-  const posts = await sanityFetch({ query: blogListQuery });
+  const { data: posts } = await sanityFetch({ query: blogListQuery });
 
   return (
     <div className="pt-32 pb-24 px-4 max-w-7xl mx-auto">

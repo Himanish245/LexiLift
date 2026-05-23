@@ -12,15 +12,11 @@ const { sanityFetch: liveSanityFetch, SanityLive } = defineLive({
   serverToken: token,
 });
 
-export async function sanityFetch<QueryResponse = any>({
-  query,
-  params = {},
-}: {
-  query: string;
-  params?: Record<string, unknown>;
-}): Promise<QueryResponse> {
-  const { data } = await liveSanityFetch({ query, params });
-  return data as QueryResponse;
-}
+export const sanityFetch = async <QueryResponse = any>(
+  options: Parameters<typeof liveSanityFetch>[0]
+) => {
+  const res = await liveSanityFetch(options);
+  return { ...res, data: res.data as QueryResponse };
+};
 
 export { SanityLive };
