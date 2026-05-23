@@ -11,10 +11,10 @@ export default async function SiteLayout({
   const { data: settings } = await sanityFetch({ query: siteSettingsQuery });
 
   const defaultNavLinks = [
-    { label: "Home", href: "/", isExternal: false },
+    { label: "Platform", href: "/#platform", isExternal: false },
+    { label: "Resources", href: "/#resources", isExternal: false },
     { label: "Pricing", href: "/pricing", isExternal: false },
-    { label: "Blog", href: "/blog", isExternal: false },
-    { label: "About", href: "/about", isExternal: false },
+    { label: "Company", href: "/#company", isExternal: false },
   ];
 
   const defaultFooterLinks = [

@@ -36,69 +36,65 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-        className={`fixed top-4 left-4 right-4 z-50 mx-auto max-w-7xl rounded-2xl transition-all duration-300 ease-out ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ease-out ${
           scrolled
-            ? "bg-surface/80 py-3 px-6 shadow-sm border-b border-outline-variant"
-            : "bg-transparent py-4 px-6"
+            ? "bg-surface/90 py-3 px-6 shadow-sm border-b border-outline-variant/30"
+            : "bg-transparent py-5 px-6"
         }`}
         style={{
           backdropFilter: scrolled ? "blur(16px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
         }}
       >
-        <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <Link 
             href="/" 
-            className="flex items-center gap-1.5 group transition-transform duration-200 hover:scale-[1.02]"
+            className="flex items-center group transition-transform duration-200 hover:scale-[1.02]"
           >
-            <Image
-              src="/logo.svg"
-              alt={siteName}
-              width={32}
-              height={32}
-              className="w-8 h-8 object-contain transition-transform duration-300 ease-out group-hover:rotate-[8deg]"
-              priority
-            />
-            <span className="font-sora text-xl font-extrabold tracking-tight text-foreground">
-              {siteName === "LexiLift" ? (
-                <>
-                  Lexi
-                  <span className="text-primary">
-                    Lift
-                  </span>
-                </>
-              ) : (
-                siteName
-              )}
+            <span className="font-serif text-2xl font-bold tracking-tight text-primary">
+              LexiLift
             </span>
           </Link>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm text-muted hover:text-foreground transition-colors duration-200"
-                {...(link.isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = link.label === "Platform";
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`relative text-sm font-medium transition-colors duration-200 py-1 ${
+                    isActive
+                      ? "text-primary border-b-2 border-primary font-semibold"
+                      : "text-on-surface-variant hover:text-on-surface"
+                  }`}
+                  {...(link.isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
-        {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <Button href="/contact" size="sm">
-              Demo
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center gap-6">
+            <Link
+              href="/contact"
+              className="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors duration-200"
+            >
+              Login
+            </Link>
+            <Button href="/contact" size="sm" className="bg-primary text-on-primary hover:bg-primary-container">
+              Get Started
             </Button>
           </div>
 
           {/* Mobile Controls */}
           <div className="flex md:hidden items-center gap-3">
-            <Button href="/contact" size="sm">
-              Demo
+            <Button href="/contact" size="sm" className="bg-primary text-on-primary">
+              Get Started
             </Button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -107,15 +103,15 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
             >
               <motion.span
                 animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="block w-5 h-0.5 bg-muted"
+                className="block w-5 h-0.5 bg-on-surface-variant"
               />
               <motion.span
                 animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="block w-3.5 h-0.5 bg-muted"
+                className="block w-3.5 h-0.5 bg-on-surface-variant"
               />
               <motion.span
                 animate={mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className="block w-5 h-0.5 bg-muted"
+                className="block w-5 h-0.5 bg-on-surface-variant"
               />
             </button>
           </div>

@@ -50,7 +50,7 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
                   <Link
                     href={link.href}
                     onClick={onClose}
-                    className="block text-lg font-medium text-foreground hover:text-accent-purple transition-colors py-2 border-b border-border/50"
+                    className="block text-lg font-medium text-foreground hover:text-primary transition-colors py-2 border-b border-border/50"
                   >
                     {link.label}
                   </Link>
@@ -63,8 +63,8 @@ export function MobileMenu({ isOpen, onClose, navLinks }: MobileMenuProps) {
                 transition={{ delay: navLinks.length * 0.08 }}
                 className="pt-2 space-y-3"
               >
-                <Button href="/contact" size="lg" className="w-full text-center" onClick={onClose}>
-                  Demo
+                <Button href="/contact" size="lg" className="w-full text-center bg-primary text-on-primary" onClick={onClose}>
+                  Get Started
                 </Button>
               </motion.div>
             </nav>
