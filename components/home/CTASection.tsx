@@ -1,3 +1,5 @@
+"use client";
+
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/shared/Button";
 
@@ -9,46 +11,51 @@ interface CTASectionProps {
 }
 
 export function CTASection({ title, highlight, subtitle, button }: CTASectionProps) {
+  const displayTitle = title || "Ready to cultivate your team's wisdom?";
+  const displaySubtitle = subtitle || "Join over 500+ forward-thinking teams using LexiLift to transform their digital environment into a sanctuary for thought.";
+  const displayButton = button || { label: "Get Started for Free", href: "/contact" };
+
   return (
-    <section className="py-20 md:py-32 px-4 relative">
-      <AnimatedSection className="max-w-4xl mx-auto text-center bg-surface-container-low border border-outline-variant p-12 md:p-20 rounded-[3rem] relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg h-[200px] bg-primary-container opacity-20 blur-[100px] rounded-full pointer-events-none" />
-        <div className="relative z-10">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4">
-          {title || "Ready to"}{" "}
-          <span className="text-primary">{highlight || "Supercharge"}</span>{" "}
-          Your Knowledge?
-        </h2>
-        {subtitle && (
-          <p className="text-muted-foreground text-lg mb-8 flex items-center justify-center gap-2 flex-wrap">
-            {subtitle.includes("Join") && (
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="1.2em" 
-                height="1.2em" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-                className="inline-block flex-shrink-0 text-primary"
-              >
-                <path d="m11 17 2 2a1 1 0 1 0 3-3"/>
-                <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/>
-                <path d="m21 3 1 11h-2"/>
-                <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/>
-                <path d="M3 4h8"/>
-              </svg>
-            )}
-            <span>{subtitle}</span>
+    <section className="py-20 md:py-28 px-6 bg-surface">
+      <AnimatedSection className="max-w-5xl mx-auto text-center bg-gradient-to-tr from-[#eae8e4]/60 via-[#f4f3ef] to-[#fcede8] border border-outline-variant/35 p-12 md:p-20 rounded-[2.5rem] relative overflow-hidden shadow-sm">
+        <div className="relative z-10 flex flex-col items-center">
+          
+          {/* Title */}
+          <h2 className="text-3xl md:text-[40px] font-serif font-semibold leading-tight text-on-surface mb-5 max-w-xl">
+            {displayTitle}
+          </h2>
+
+          {/* Subtitle */}
+          <p className="text-sm md:text-[15px] leading-relaxed text-on-surface-variant/85 max-w-xl mx-auto mb-8 font-sans">
+            {displaySubtitle}
           </p>
-        )}
-        {button && (
-          <Button href={button.href} size="lg" isExternal={button.isExternal}>
-            {button.label} →
-          </Button>
-        )}
+
+          {/* Buttons */}
+          <div className="flex flex-wrap gap-4 justify-center items-center">
+            <Button
+              href={displayButton.href}
+              size="md"
+              isExternal={displayButton.isExternal}
+              className="bg-primary text-on-primary hover:bg-primary-container px-7 py-3 rounded-full text-sm font-semibold shadow-sm"
+            >
+              {displayButton.label}
+            </Button>
+            
+            <Button
+              href="/contact"
+              variant="secondary"
+              size="md"
+              className="bg-white border border-outline-variant/60 text-on-surface hover:bg-surface-container-low px-7 py-3 rounded-full text-sm font-semibold shadow-sm"
+            >
+              Book a Demo
+            </Button>
+          </div>
+
+          {/* Small Note */}
+          <p className="text-[12px] text-on-surface-variant/50 mt-4.5 font-medium font-sans">
+            No credit card required. 14-day free trial.
+          </p>
+          
         </div>
       </AnimatedSection>
     </section>
