@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, Sora } from "next/font/google";
+import { Literata, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const literata = Literata({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-literata",
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const sora = Sora({
-  subsets: ["latin"],
-  variable: "--font-sora",
+  variable: "--font-plus-jakarta-sans",
   display: "swap",
 });
 
@@ -41,8 +35,8 @@ export default async function RootLayout({
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${sora.variable}`}>
-      <body className="font-sans">
+    <html lang="en" className={`${literata.variable} ${plusJakartaSans.variable}`}>
+      <body className="font-sans antialiased text-on-surface bg-surface">
         {isDraftMode && <VisualEditing />}
         <SmoothScrollProvider>
           {children}
