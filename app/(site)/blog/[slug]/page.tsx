@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { sanityFetch } from "@/sanity/lib/client";
+import { client, sanityFetch } from "@/sanity/lib/client";
 import { blogPostQuery, blogSlugsQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "@/sanity/lib/portable-text";
@@ -13,13 +13,14 @@ export const revalidate = 60;
 
 export async function generateStaticParams() {
   try {
-    const slugs = await sanityFetch({ query: blogSlugsQuery });
+    const slugs = await client.fetch<any[]>(blogSlugsQuery);
     return slugs.map((slug: any) => ({ slug: slug.slug }));
   } catch (error) {
     console.error("Failed to fetch blog slugs for static generation:", error);
     return [];
   }
 }
+
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;

@@ -1,16 +1,7 @@
-import { draftMode } from "next/headers";
-import { redirect } from "next/navigation";
+import { defineEnableDraftMode } from "next-sanity/draft-mode";
+import { previewClient } from "@/sanity/lib/client";
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const secret = searchParams.get("secret");
-  const slug = searchParams.get("slug");
+export const { GET } = defineEnableDraftMode({
+  client: previewClient,
+});
 
-  // Basic security check (you can enhance this with a real secret from process.env)
-  if (secret !== process.env.SANITY_REVALIDATE_SECRET) {
-    return new Response("Invalid token", { status: 401 });
-  }
-
-  (await draftMode()).enable();
-  redirect(slug ? `/${slug}` : "/");
-}
