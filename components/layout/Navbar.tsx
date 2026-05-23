@@ -38,7 +38,7 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
         className={`fixed top-4 left-4 right-4 z-50 mx-auto max-w-7xl rounded-2xl transition-all duration-300 ease-out ${
           scrolled
-            ? "glass-card py-3 px-6 shadow-lg shadow-black/20"
+            ? "bg-surface/80 py-3 px-6 shadow-sm border-b border-outline-variant"
             : "bg-transparent py-4 px-6"
         }`}
         style={{
@@ -59,11 +59,11 @@ export function Navbar({ siteName, logo, navLinks }: NavbarProps) {
               height={32}
               className="w-8 h-8 object-contain transition-transform duration-300 ease-out group-hover:rotate-[8deg]"
             />
-            <span className="font-sora text-xl font-extrabold tracking-tight text-foreground">
+            <span className="font-serif text-xl font-extrabold tracking-tight text-on-surface">
               {siteName === "LexiLift" ? (
                 <>
                   Lexi
-                  <span className="bg-gradient-to-r from-[#00F0FF] via-[#7c5cff] to-[#FF007A] bg-clip-text text-transparent">
+                  <span className="text-primary">
                     Lift
                   </span>
                 </>

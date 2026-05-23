@@ -4,6 +4,9 @@ import { aboutPageQuery } from "@/sanity/lib/queries";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { GradientOrbs } from "@/components/animations/GradientOrbs";
+import { MeshGradient } from "@/components/animations/MeshGradient";
+import { NoiseOverlay } from "@/components/animations/NoiseOverlay";
+import { SpotlightCard } from "@/components/animations/SpotlightCard";
 import { TeamGrid } from "@/components/about/TeamGrid";
 
 export const revalidate = 60;
@@ -27,7 +30,9 @@ export default async function AboutPage() {
 
   return (
     <>
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-32 pb-20 overflow-hidden min-h-[60vh] flex items-center justify-center">
+        <NoiseOverlay />
+        <MeshGradient className="opacity-50" />
         <GradientOrbs />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <AnimatedSection>
@@ -42,18 +47,21 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-card border-y border-border/50">
-        <div className="max-w-4xl mx-auto px-4">
-          <AnimatedSection className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-4">{data?.missionTitle || "Our Mission"}</h2>
-              <div className="prose prose-invert text-muted-foreground">
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[600px] bg-[var(--color-accent-teal)] opacity-[0.03] blur-[100px] rounded-[100%] pointer-events-none -z-10" />
+        <div className="max-w-5xl mx-auto px-4">
+          <AnimatedSection className="grid md:grid-cols-2 gap-8 items-stretch">
+            <div className="glass-card rounded-[24px] p-8 md:p-12 border-white/5 bg-[var(--color-card)]/40 relative overflow-hidden group hover:border-white/10 transition-colors">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--color-accent-teal)] to-[var(--color-accent-purple)] opacity-50 group-hover:opacity-100 transition-opacity" />
+              <h2 className="text-3xl font-bold mb-6 text-foreground">{data?.missionTitle || "Our Mission"}</h2>
+              <div className="prose prose-invert text-muted-foreground leading-relaxed">
                 <p>{data?.missionBody || "We believe that knowledge should flow freely within an organization. By leveraging advanced AI and retrieval-augmented generation, we're making it possible for anyone to instantly access the exact information they need, right when they need it."}</p>
               </div>
             </div>
-            <div>
-              <h2 className="text-3xl font-bold mb-4">{data?.storyTitle || "Our Story"}</h2>
-              <div className="prose prose-invert text-muted-foreground">
+            <div className="glass-card rounded-[24px] p-8 md:p-12 border-white/5 bg-[var(--color-card)]/40 relative overflow-hidden group hover:border-white/10 transition-colors">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--color-accent-purple)] to-[var(--color-accent-pink)] opacity-50 group-hover:opacity-100 transition-opacity" />
+              <h2 className="text-3xl font-bold mb-6 text-foreground">{data?.storyTitle || "Our Story"}</h2>
+              <div className="prose prose-invert text-muted-foreground leading-relaxed">
                 <p>{data?.storyBody || "Started in 2026, LexiLift grew out of our own frustration with scattered documentation, outdated wikis, and endless Slack searches. We built the tool we wanted to use, and now we're sharing it with the world."}</p>
               </div>
             </div>
@@ -61,18 +69,23 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 px-4 max-w-7xl mx-auto">
+      <section className="relative py-24 px-4 max-w-7xl mx-auto">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[600px] bg-[var(--color-accent-purple)] opacity-[0.03] blur-[100px] rounded-[100%] pointer-events-none -z-10" />
         <AnimatedSection>
           <SectionHeader title="Our Values" />
         </AnimatedSection>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {(data?.values || defaultValues).map((value: any, i: number) => (
             <AnimatedSection key={value.title} delay={i * 0.1}>
-              <div className="text-center">
-                <div className="text-4xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold mb-2">{value.title}</h3>
-                <p className="text-muted-foreground">{value.description}</p>
-              </div>
+              <SpotlightCard className="glass-card rounded-[24px] p-8 card-hover group h-full bg-[var(--color-card)]/40 border-white/5 text-center">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-white/10 to-transparent flex items-center justify-center border border-white/10 shadow-[0_0_20px_rgba(124,58,237,0.1)] group-hover:shadow-[0_0_30px_rgba(124,58,237,0.25)] group-hover:border-[var(--color-accent-purple)]/30 transition-all duration-500">
+                  <div className="text-3xl group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
+                    {value.icon}
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold mb-3 tracking-tight">{value.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
+              </SpotlightCard>
             </AnimatedSection>
           ))}
         </div>
