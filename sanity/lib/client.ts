@@ -26,11 +26,13 @@ export const previewClient = createClient({
   apiVersion,
   useCdn: false,
   token: process.env.SANITY_API_READ_TOKEN,
+  perspective: "previewDrafts",
   stega: {
     enabled: true,
     studioUrl: "/studio",
   },
 });
+
 
 import { draftMode } from "next/headers";
 
