@@ -21,7 +21,7 @@ export function LogoMarquee({ logos }: LogoMarqueeProps) {
       <p className="text-xs tracking-[0.15em] uppercase text-muted-foreground text-center mb-8">
         Trusted by innovative teams
       </p>
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <div className="flex animate-marquee gap-20 items-center">
           {tripled.map((item, i) => (
             <div key={`${item.name}-${i}`} className="flex-shrink-0 opacity-40 hover:opacity-70 transition-opacity">

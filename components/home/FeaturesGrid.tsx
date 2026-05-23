@@ -27,7 +27,7 @@ export function FeaturesGrid({ headline, tagline, features }: FeaturesGridProps)
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {features.map((feature, i) => (
           <AnimatedSection key={feature.title} delay={i * 0.1}>
-            <SpotlightCard className="bg-card border border-border rounded-2xl p-6 md:p-8 card-hover group h-full">
+            <SpotlightCard className="glass-card rounded-2xl p-6 md:p-8 card-hover group h-full">
               <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
                 {feature.icon}
               </div>
