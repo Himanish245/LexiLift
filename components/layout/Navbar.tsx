@@ -78,12 +78,6 @@ export function Navbar({ siteName: _siteName, logo: _logo, navLinks }: NavbarPro
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-6">
-            <Link
-              href="/contact"
-              className="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors duration-200"
-            >
-              Login
-            </Link>
             <Button href="/contact" size="sm" className="bg-primary text-on-primary hover:bg-primary-container">
               Get Started
             </Button>

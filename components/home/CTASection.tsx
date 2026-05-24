@@ -5,27 +5,28 @@ import { Button } from "@/components/shared/Button";
 
 interface CTASectionProps {
   title?: string;
+  highlight?: string;
   subtitle?: string;
   button?: { label: string; href: string; isExternal?: boolean };
 }
 
 export function CTASection({ title, subtitle, button }: CTASectionProps) {
-  const displayTitle = title || "Ready to cultivate your team's wisdom?";
-  const displaySubtitle = subtitle || "Join over 500+ forward-thinking teams using LexiLift to transform their digital environment into a sanctuary for thought.";
-  const displayButton = button || { label: "Get Started for Free", href: "/contact" };
+  const displayTitle = title || "Ready to lift your perspective?";
+  const displaySubtitle = subtitle || "Join 50,000+ teams who have found their digital sanctuary with LexiLift.";
+  const displayButton = button || { label: "Start Your Journey", href: "/contact" };
 
   return (
     <section className="py-20 md:py-28 px-6 bg-surface">
-      <AnimatedSection className="max-w-5xl mx-auto text-center bg-gradient-to-tr from-[#eae8e4]/60 via-[#f4f3ef] to-[#fcede8] border border-outline-variant/35 p-12 md:p-20 rounded-[2.5rem] relative overflow-hidden shadow-sm">
+      <AnimatedSection className="max-w-5xl mx-auto text-center bg-[#eae8e4] p-16 md:p-24 rounded-[2.5rem] relative overflow-hidden shadow-sm">
         <div className="relative z-10 flex flex-col items-center">
           
           {/* Title */}
-          <h2 className="text-3xl md:text-[40px] font-serif font-semibold leading-tight text-on-surface mb-5 max-w-xl">
+          <h2 className="text-3xl md:text-4xl lg:text-[40px] font-serif font-bold leading-tight text-on-surface mb-5 max-w-2xl">
             {displayTitle}
           </h2>
 
           {/* Subtitle */}
-          <p className="text-sm md:text-[15px] leading-relaxed text-on-surface-variant/85 max-w-xl mx-auto mb-8 font-sans">
+          <p className="text-sm md:text-[15px] leading-relaxed text-on-surface-variant/90 max-w-xl mx-auto mb-10 font-sans">
             {displaySubtitle}
           </p>
 
@@ -35,26 +36,20 @@ export function CTASection({ title, subtitle, button }: CTASectionProps) {
               href={displayButton.href}
               size="md"
               isExternal={displayButton.isExternal}
-              className="bg-primary text-on-primary hover:bg-primary-container px-7 py-3 rounded-full text-sm font-semibold shadow-sm"
+              className="bg-[#36664d] text-white hover:bg-[#2b513d] px-8 py-3.5 rounded-full text-sm font-semibold shadow-sm transition-colors border-none"
             >
-              {displayButton.label}
+              Start Your Journey
             </Button>
             
             <Button
               href="/contact"
               variant="secondary"
               size="md"
-              className="bg-white border border-outline-variant/60 text-on-surface hover:bg-surface-container-low px-7 py-3 rounded-full text-sm font-semibold shadow-sm"
+              className="bg-transparent border border-[#36664d] text-[#36664d] hover:bg-[#36664d]/5 px-8 py-3.5 rounded-full text-sm font-semibold shadow-sm transition-colors"
             >
-              Book a Demo
+              Talk to a Human
             </Button>
           </div>
-
-          {/* Small Note */}
-          <p className="text-[12px] text-on-surface-variant/50 mt-4.5 font-medium font-sans">
-            No credit card required. 14-day free trial.
-          </p>
-          
         </div>
       </AnimatedSection>
     </section>

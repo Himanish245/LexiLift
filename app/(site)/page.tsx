@@ -42,13 +42,7 @@ export default async function HomePage() {
     <>
       <HeroSection {...hero} />
       <LogoMarquee logos={data?.trustedByLogos || []} />
-      <FeaturesGrid
-        headline={data?.featuresHeadline}
-        tagline={data?.featuresTagline}
-        features={(data?.features || defaultFeatures).filter(
-          (f: any) => f.title !== "Seamless Integrations" && f.title !== "Integrations"
-        )}
-      />
+      <FeaturesGrid />
       <CTASection
         title={data?.ctaTitle}
         highlight={data?.ctaHighlight}

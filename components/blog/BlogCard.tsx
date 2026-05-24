@@ -15,58 +15,49 @@ interface BlogCardProps {
   };
 }
 
-import { SpotlightCard } from "@/components/animations/SpotlightCard";
-
 export function BlogCard({ post }: BlogCardProps) {
+  // Use category or default to Productivity
+  const category = post.categories?.[0]?.title || "Article";
+
   return (
-    <SpotlightCard className="group h-full flex flex-col bg-card border border-border rounded-2xl overflow-hidden card-hover">
+    <div className="group h-full flex flex-col bg-white border border-outline-variant/30 rounded-[2.5rem] p-6 shadow-sm hover:shadow-md transition-shadow">
       <Link href={`/blog/${post.slug.current}`} className="flex flex-col h-full">
-        <div className="relative w-full aspect-[16/9] overflow-hidden bg-muted/20">
+        <div className="relative w-full aspect-[4/3] rounded-[1.5rem] overflow-hidden mb-6">
           {post.coverImage ? (
             <Image
-              src={urlFor(post.coverImage).width(600).height(340).url()}
+              src={urlFor(post.coverImage).width(600).height(450).url()}
               alt={post.title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-accent-purple/20 to-accent-teal/20" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#36664d]/10 to-[#8a5a44]/10" />
           )}
         </div>
-        <div className="p-6 flex flex-col flex-1">
-          <div className="flex items-center gap-2 mb-3">
-            {post.categories?.slice(0, 2).map((cat) => (
-              <span key={cat.title} className="text-xs font-semibold text-accent-teal uppercase tracking-wider">
-                {cat.title}
-              </span>
-            ))}
-            {post.categories?.length && <span className="text-muted-foreground/30">•</span>}
-            <span className="text-xs text-muted-foreground">{formatDate(post.publishedAt)}</span>
+        
+        <div className="flex flex-col flex-1">
+          <div className="mb-4">
+            <span className="inline-block px-3 py-1 bg-[#fcede8] text-[#8a5a44] text-[10px] uppercase font-bold tracking-wider rounded-full">
+              {category}
+            </span>
           </div>
-          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-accent-purple transition-colors">
+          
+          <h3 className="text-xl md:text-2xl font-serif font-bold text-[#111827] mb-3 leading-tight group-hover:text-[#36664d] transition-colors">
             {post.title}
           </h3>
-          <p className="text-muted-foreground text-sm line-clamp-3 mb-6 flex-1">
+          
+          <p className="text-[#111827]/70 text-sm leading-relaxed line-clamp-3 mb-6 flex-1">
             {post.excerpt}
           </p>
-          <div className="flex items-center gap-3 mt-auto">
-            {post.author?.image ? (
-              <Image
-                src={urlFor(post.author.image).width(32).height(32).url()}
-                alt={post.author.name}
-                width={32}
-                height={32}
-                className="rounded-full"
-              />
-            ) : (
-              <div className="w-8 h-8 rounded-full bg-accent-purple/20 flex items-center justify-center text-xs font-bold text-accent-purple">
-                {post.author?.name?.charAt(0) || "U"}
-              </div>
-            )}
-            <span className="text-sm font-medium text-foreground/80">{post.author?.name || "Unknown"}</span>
+          
+          <div className="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/20">
+            <span className="text-[11px] text-[#111827]/50 font-medium uppercase tracking-wider">{formatDate(post.publishedAt)}</span>
+            <span className="text-[13px] font-semibold text-[#36664d] flex items-center gap-1 group-hover:gap-2 transition-all">
+              Read More
+            </span>
           </div>
         </div>
       </Link>
-    </SpotlightCard>
+    </div>
   );
 }
